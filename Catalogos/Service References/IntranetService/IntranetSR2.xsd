@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://Intranet.ws.Model/2015/Catalogos" elementFormDefault="qualified" targetNamespace="http://Intranet.ws.Model/2015/Catalogos" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:11874/Intranet.ws.Host/IntranetSR.svc?xsd=xsd1" namespace="http://Intranet.ws.Model/2015/Seguridad" />
+  <xs:element xmlns:q1="http://Intranet.ws.Model/2015/Seguridad" name="FiltroUsuario" nillable="true" type="q1:Usuario" />
+  <xs:element xmlns:q2="http://Intranet.ws.Model/2015/Seguridad" name="Usuarios" nillable="true" type="q2:Usuarios" />
+  <xs:element name="empty" nillable="true" type="xs:int" />
+  <xs:complexType name="CountingEntities">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="NoPaises" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="NoEstados" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="NoMunicipios" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="NoCiudades" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="NoCP" nillable="true" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CountingEntities" nillable="true" type="tns:CountingEntities" />
+  <xs:complexType name="Pais">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="PaisID" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="Nombre" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Codigo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Moneda" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CodMoneda" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FechaUltimaModificacion" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="UsuarioID" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="Activo" nillable="true" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Pais" nillable="true" type="tns:Pais" />
+  <xs:element name="FiltroPais" nillable="true" type="tns:Pais" />
+  <xs:complexType name="Paises">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Pais" nillable="true" type="tns:Pais" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Paises" nillable="true" type="tns:Paises" />
+  <xs:element name="Respuesta" nillable="true" type="xs:int" />
+  <xs:complexType name="Estado">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="EstadoID" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="Codigo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Nombre" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PaisID" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="FechaUltimaModificacion" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="UsuarioID" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="Activo" nillable="true" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Pais" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Estado" nillable="true" type="tns:Estado" />
+  <xs:element name="FiltroEstado" nillable="true" type="tns:Estado" />
+  <xs:complexType name="Estados">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Estado" nillable="true" type="tns:Estado" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Estados" nillable="true" type="tns:Estados" />
+  <xs:complexType name="Municipio">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="MunicipioID" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="Codigo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Nombre" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="EstadoID" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="FechaUltimaModificacion" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="UsuarioID" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="Activo" nillable="true" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Estado" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PaisID" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="Pais" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Municipio" nillable="true" type="tns:Municipio" />
+  <xs:element name="FiltroMunicipio" nillable="true" type="tns:Municipio" />
+  <xs:complexType name="Municipios">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Municipio" nillable="true" type="tns:Municipio" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Municipios" nillable="true" type="tns:Municipios" />
+  <xs:complexType name="Ciudad">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CiudadID" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="Nombre" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="EstadoID" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="MunicipioID" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="FechaUltimaModificacion" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="UsuarioID" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="Activo" nillable="true" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Municipio" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Estado" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PaisID" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="Pais" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Ciudad" nillable="true" type="tns:Ciudad" />
+  <xs:element name="FiltroCiudad" nillable="true" type="tns:Ciudad" />
+  <xs:complexType name="Ciudades">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Ciudad" nillable="true" type="tns:Ciudad" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Ciudades" nillable="true" type="tns:Ciudades" />
+  <xs:complexType name="CodigoPostal">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CodigoPostalID" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="codigoPostal" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="MunicipioID" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="Municipio" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CiudadID" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="Ciudad" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Asentamiento" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TipoAsentamiento" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Zona" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FechaUltimaModificacion" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="UsuarioID" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="Activo" nillable="true" type="xs:boolean" />
+      <xs:element minOccurs="0" name="EstadoID" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="Estado" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PaisID" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="Pais" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CodigoPostal" nillable="true" type="tns:CodigoPostal" />
+  <xs:element name="FiltroCodigoPostal" nillable="true" type="tns:CodigoPostal" />
+  <xs:complexType name="CodigosPostales">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="CodigoPostal" nillable="true" type="tns:CodigoPostal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CodigosPostales" nillable="true" type="tns:CodigosPostales" />
+  <xs:complexType name="UsuarioFuncion">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="UsuarioID" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="RolID" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="Rol" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FuncionID" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="Funcion" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FuncionPadreID" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="FuncionPadre" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FuncionDescripcion" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Url" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Recordarme" nillable="true" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Foto" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NombreCompleto" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Metadata" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="RolActivo" nillable="true" type="xs:boolean" />
+      <xs:element minOccurs="0" name="FuncionActivo" nillable="true" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Nombre" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Activo" nillable="true" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UsuarioFuncion" nillable="true" type="tns:UsuarioFuncion" />
+  <xs:element name="FiltroUsuarioFuncion" nillable="true" type="tns:UsuarioFuncion" />
+  <xs:complexType name="UsuarioFunciones">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="UsuarioFuncion" nillable="true" type="tns:UsuarioFuncion" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UsuarioFunciones" nillable="true" type="tns:UsuarioFunciones" />
+  <xs:complexType name="RolFuncion">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="RolID" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="Rol" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FuncionID" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="Funcion" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FuncionPadreID" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="FuncionPadre" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FuncionDescripcion" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Url" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="RolActivo" nillable="true" type="xs:boolean" />
+      <xs:element minOccurs="0" name="TipoFuncionID" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="FuncionActivo" nillable="true" type="xs:boolean" />
+      <xs:element minOccurs="0" name="TipoFuncion" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Metadata" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="RolFuncion" nillable="true" type="tns:RolFuncion" />
+  <xs:element name="FiltroRolFuncion" nillable="true" type="tns:RolFuncion" />
+  <xs:complexType name="RolFunciones">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="RolFuncion" nillable="true" type="tns:RolFuncion" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="RolFunciones" nillable="true" type="tns:RolFunciones" />
+</xs:schema>

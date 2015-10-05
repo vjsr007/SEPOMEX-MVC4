@@ -1,0 +1,48 @@
+﻿@{
+    var session = Session["UsuarioWeb"];
+
+    Catalogos.IntranetService.UsuarioFunciones fn = new Catalogos.IntranetService.UsuarioFunciones(); 
+    if (session!=null){
+        fn.AddRange(((Catalogos.Models.Seguridad.UsuarioWeb)session).UsuarioFunciones);
+    }
+}
+@RenderMenu(fn)
+@helper RenderMenu(Catalogos.IntranetService.UsuarioFunciones fn)
+{
+    var parent = fn.Where(fu => fu.FuncionPadreID == null);
+    if(parent.Count()>0){  
+        @:<div id="navbar" class="navbar-collapse collapse">
+            @:<ul class="nav navbar-nav">
+            foreach (var pa in parent)
+            {
+                var childs = fn.Where(p => p.FuncionPadreID == pa.FuncionID);     
+   
+                if(childs.Count()>0){       
+                    @:<li class="dropdown">
+                    @:<a href="@Url.Content(pa.Url)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="true">
+                        @:<i class="@pa.Metadata"></i>
+                        @pa.FuncionDescripcion
+                    @:</a>
+                    
+                    @:<ul class="dropdown-menu" role="menu">
+                    foreach (var c in childs)
+                    {
+                        @:<li>
+                            @:<a href="@Url.Content(c.Url)">@c.FuncionDescripcion</a>
+                        @:</li>
+                    }
+                    @:</ul>
+                }
+                else{
+                    @:<li class="dropdown">
+                    @:<a href="@Url.Content(pa.Url)" role="button" >
+                        @:<i class="@pa.Metadata"></i>
+                        @pa.FuncionDescripcion
+                    @:</a>
+                }
+                @:</li>       
+            }
+            @:</ul>
+        @:</div> 
+    }
+}

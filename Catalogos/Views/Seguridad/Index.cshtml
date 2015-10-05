@@ -1,0 +1,109 @@
+﻿@{ViewBag.Title = "Seguridad";}
+@section scripts {
+    <script src="~/Js/Seguridad.Index.js"></script>    
+}
+<div class="container-fluid" data-ng-app="Catalogos" data-ng-controller="SeguridadController as ctrl">
+    <div class="col-lg-12 col-md-24">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <i class="fa fa-filter fa-fw"></i> Filtros
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-5">
+                        <label for="txtNombre" class="control-label" >Nombre</label>
+                        <input type="text" class="form-control" id="txtNombre" data-ng-model="filtro.Nombre" placeholder="Nombre del usuario" />
+                    </div>
+                    <div class="col-lg-2">
+                        <label></label>
+                        <div class="checkbox">                        
+                            <label>
+                                <input id="chkActivo" checked="checked" data-ng-model="filtro.Activo" type="checkbox" /> Activo
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-lg-1 pull-right">
+                        <button id="btnBuscar" type="button" data-ng-click="buscarUsuarios(filtro)" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6 col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <i class="fa fa-users fa-fw"></i> Usuarios
+            </div>
+            <div class="panel-body selectable">
+                <div class="col-lg-6 col-md-12" data-user-selected="{{user.UsuarioID}}" data-ng-repeat="user in users | orderBy:'UsuarioID'" painted-users>
+                    <div class="panel panel-primary" >
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-user fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <h3 id="txtNomnbre">{{user.Nombre}}</h3>
+                                    <div id="txtRol">{{user.Rol}}</div>
+                                    <div>ID: {{user.UsuarioID}}</div>
+                                </div>
+                            </div>
+                        </div>
+                            <div class="panel-footer">
+                                <span class="pull-left">Editar</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6 col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <i class="fa fa-wrench fa-fw"></i> Opciones
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <label for="txtUsuario" class="control-label" >Usuario</label>
+                        <input data-ng-model="user.Nombre" type="text" class="form-control" id="txtUsuario" value="{{user.Nombre}}" />
+                    </div>
+                </div><br />
+                <div class="row">
+                    <div class="col-lg-12">
+                        <label for="txtNombreCompleto" class="control-label" >Nombre Completo</label>
+                        <input data-ng-model="user.NombreCompleto" type="text" class="form-control" id="txtNombreCompleto" value="{{user.NombreCompleto}}" />
+                    </div>
+                </div><br />
+                <div class="row">
+                    <div class="col-lg-12">
+                        <label class="control-label" >Rol</label><br />
+                        <select class="form-control" data-ng-model="user.RolID" data-ng-change="changeRol()" data-ng-options="i.RolID as i.Rol for i in roles"></select>
+                    </div>
+                </div><br />
+                <div class="row">
+                    <div class="col-lg-12">
+                        <label for="chkUserActivo" class="control-label" >
+                        <input type="checkbox" data-ng-model="user.Activo" id="chkUserActivo" value="{{user.Activo}}" />
+                        Activo</label>
+                    </div>
+                </div><br />                
+                <div class="row">                    
+                    <div class="col-lg-12">
+                        <label class="control-label" >Funciones</label>
+                        <ul class="list-group">
+                            <li class="list-group-item" data-ng-repeat=" f in user.funciones">
+                                {{ f.Funcion }}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

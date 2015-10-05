@@ -1,0 +1,515 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://Intranet.ws.Model/2015/Catalogos" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="IntranetSR" targetNamespace="http://Intranet.ws.Model/2015/Catalogos" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://Intranet.ws.Model/2015/Catalogos/Imports">
+      <xsd:import schemaLocation="http://localhost:11874/Intranet.ws.Host/IntranetSR.svc?xsd=xsd2" namespace="http://Intranet.ws.Model/2015/Catalogos" />
+      <xsd:import schemaLocation="http://localhost:11874/Intranet.ws.Host/IntranetSR.svc?xsd=xsd3" namespace="http://Intranet.ws.Model/2015/Error" />
+      <xsd:import schemaLocation="http://localhost:11874/Intranet.ws.Host/IntranetSR.svc?xsd=xsd0" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:11874/Intranet.ws.Host/IntranetSR.svc?xsd=xsd1" namespace="http://Intranet.ws.Model/2015/Seguridad" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="ObtenerUsuarioReq">
+    <wsdl:part name="FiltroUsuario" element="tns:FiltroUsuario" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerUsuarioRes">
+    <wsdl:part name="Usuarios" element="tns:Usuarios" />
+  </wsdl:message>
+  <wsdl:message name="ServiceContract_ObtenerUsuario_ErrorFault_FaultMessage">
+    <wsdl:part xmlns:q1="http://Intranet.ws.Model/2015/Error" name="detail" element="q1:Error" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerCountingEntitiesReq">
+    <wsdl:part name="empty" element="tns:empty" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerCountingEntitiesRes">
+    <wsdl:part name="CountingEntities" element="tns:CountingEntities" />
+  </wsdl:message>
+  <wsdl:message name="ServiceContract_ObtenerCountingEntities_ErrorFault_FaultMessage">
+    <wsdl:part xmlns:q2="http://Intranet.ws.Model/2015/Error" name="detail" element="q2:Error" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerPaisesReq">
+    <wsdl:part name="FiltroPais" element="tns:FiltroPais" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerPaisesRes">
+    <wsdl:part name="Paises" element="tns:Paises" />
+  </wsdl:message>
+  <wsdl:message name="ServiceContract_ObtenerPaises_ErrorFault_FaultMessage">
+    <wsdl:part xmlns:q3="http://Intranet.ws.Model/2015/Error" name="detail" element="q3:Error" />
+  </wsdl:message>
+  <wsdl:message name="AgregarPaisesReq">
+    <wsdl:part name="FiltroPais" element="tns:FiltroPais" />
+  </wsdl:message>
+  <wsdl:message name="AgregarPaisesRes">
+    <wsdl:part name="Respuesta" element="tns:Respuesta" />
+  </wsdl:message>
+  <wsdl:message name="ServiceContract_AgregarPais_ErrorFault_FaultMessage">
+    <wsdl:part xmlns:q4="http://Intranet.ws.Model/2015/Error" name="detail" element="q4:Error" />
+  </wsdl:message>
+  <wsdl:message name="EditarPaisesReq">
+    <wsdl:part name="FiltroPais" element="tns:FiltroPais" />
+  </wsdl:message>
+  <wsdl:message name="EditarPaisesRes">
+    <wsdl:part name="Respuesta" element="tns:Respuesta" />
+  </wsdl:message>
+  <wsdl:message name="ServiceContract_EditarPais_ErrorFault_FaultMessage">
+    <wsdl:part xmlns:q5="http://Intranet.ws.Model/2015/Error" name="detail" element="q5:Error" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerEstadosReq">
+    <wsdl:part name="FiltroEstado" element="tns:FiltroEstado" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerEstadosRes">
+    <wsdl:part name="Estados" element="tns:Estados" />
+  </wsdl:message>
+  <wsdl:message name="ServiceContract_ObtenerEstados_ErrorFault_FaultMessage">
+    <wsdl:part xmlns:q6="http://Intranet.ws.Model/2015/Error" name="detail" element="q6:Error" />
+  </wsdl:message>
+  <wsdl:message name="AgregarEstadosReq">
+    <wsdl:part name="FiltroEstado" element="tns:FiltroEstado" />
+  </wsdl:message>
+  <wsdl:message name="AgregarEstadosRes">
+    <wsdl:part name="Respuesta" element="tns:Respuesta" />
+  </wsdl:message>
+  <wsdl:message name="ServiceContract_AgregarEstado_ErrorFault_FaultMessage">
+    <wsdl:part xmlns:q7="http://Intranet.ws.Model/2015/Error" name="detail" element="q7:Error" />
+  </wsdl:message>
+  <wsdl:message name="EditarEstadosReq">
+    <wsdl:part name="FiltroEstado" element="tns:FiltroEstado" />
+  </wsdl:message>
+  <wsdl:message name="EditarEstadosRes">
+    <wsdl:part name="Respuesta" element="tns:Respuesta" />
+  </wsdl:message>
+  <wsdl:message name="ServiceContract_EditarEstado_ErrorFault_FaultMessage">
+    <wsdl:part xmlns:q8="http://Intranet.ws.Model/2015/Error" name="detail" element="q8:Error" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerMunicipiosReq">
+    <wsdl:part name="FiltroMunicipio" element="tns:FiltroMunicipio" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerMunicipiosRes">
+    <wsdl:part name="Municipios" element="tns:Municipios" />
+  </wsdl:message>
+  <wsdl:message name="ServiceContract_ObtenerMunicipios_ErrorFault_FaultMessage">
+    <wsdl:part xmlns:q9="http://Intranet.ws.Model/2015/Error" name="detail" element="q9:Error" />
+  </wsdl:message>
+  <wsdl:message name="AgregarMunicipiosReq">
+    <wsdl:part name="FiltroMunicipio" element="tns:FiltroMunicipio" />
+  </wsdl:message>
+  <wsdl:message name="AgregarMunicipiosRes">
+    <wsdl:part name="Respuesta" element="tns:Respuesta" />
+  </wsdl:message>
+  <wsdl:message name="ServiceContract_AgregarMunicipio_ErrorFault_FaultMessage">
+    <wsdl:part xmlns:q10="http://Intranet.ws.Model/2015/Error" name="detail" element="q10:Error" />
+  </wsdl:message>
+  <wsdl:message name="EditarMunicipiosReq">
+    <wsdl:part name="FiltroMunicipio" element="tns:FiltroMunicipio" />
+  </wsdl:message>
+  <wsdl:message name="EditarMunicipiosRes">
+    <wsdl:part name="Respuesta" element="tns:Respuesta" />
+  </wsdl:message>
+  <wsdl:message name="ServiceContract_EditarMunicipio_ErrorFault_FaultMessage">
+    <wsdl:part xmlns:q11="http://Intranet.ws.Model/2015/Error" name="detail" element="q11:Error" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerCiudadesReq">
+    <wsdl:part name="FiltroCiudad" element="tns:FiltroCiudad" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerCiudadesRes">
+    <wsdl:part name="Ciudades" element="tns:Ciudades" />
+  </wsdl:message>
+  <wsdl:message name="ServiceContract_ObtenerCiudades_ErrorFault_FaultMessage">
+    <wsdl:part xmlns:q12="http://Intranet.ws.Model/2015/Error" name="detail" element="q12:Error" />
+  </wsdl:message>
+  <wsdl:message name="AgregarCiudadesReq">
+    <wsdl:part name="FiltroCiudad" element="tns:FiltroCiudad" />
+  </wsdl:message>
+  <wsdl:message name="AgregarCiudadesRes">
+    <wsdl:part name="Respuesta" element="tns:Respuesta" />
+  </wsdl:message>
+  <wsdl:message name="ServiceContract_AgregarCiudad_ErrorFault_FaultMessage">
+    <wsdl:part xmlns:q13="http://Intranet.ws.Model/2015/Error" name="detail" element="q13:Error" />
+  </wsdl:message>
+  <wsdl:message name="EditarCiudadesReq">
+    <wsdl:part name="FiltroCiudad" element="tns:FiltroCiudad" />
+  </wsdl:message>
+  <wsdl:message name="EditarCiudadesRes">
+    <wsdl:part name="Respuesta" element="tns:Respuesta" />
+  </wsdl:message>
+  <wsdl:message name="ServiceContract_EditarCiudad_ErrorFault_FaultMessage">
+    <wsdl:part xmlns:q14="http://Intranet.ws.Model/2015/Error" name="detail" element="q14:Error" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerCodigosPostalesReq">
+    <wsdl:part name="FiltroCodigoPostal" element="tns:FiltroCodigoPostal" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerCodigosPostalesRes">
+    <wsdl:part name="CodigosPostales" element="tns:CodigosPostales" />
+  </wsdl:message>
+  <wsdl:message name="ServiceContract_ObtenerCodigosPostales_ErrorFault_FaultMessage">
+    <wsdl:part xmlns:q15="http://Intranet.ws.Model/2015/Error" name="detail" element="q15:Error" />
+  </wsdl:message>
+  <wsdl:message name="AgregarCodigosPostalesReq">
+    <wsdl:part name="FiltroCodigoPostal" element="tns:FiltroCodigoPostal" />
+  </wsdl:message>
+  <wsdl:message name="AgregarCodigosPostalesRes">
+    <wsdl:part name="Respuesta" element="tns:Respuesta" />
+  </wsdl:message>
+  <wsdl:message name="ServiceContract_AgregarCodigoPostal_ErrorFault_FaultMessage">
+    <wsdl:part xmlns:q16="http://Intranet.ws.Model/2015/Error" name="detail" element="q16:Error" />
+  </wsdl:message>
+  <wsdl:message name="EditarCodigosPostalesReq">
+    <wsdl:part name="FiltroCodigoPostal" element="tns:FiltroCodigoPostal" />
+  </wsdl:message>
+  <wsdl:message name="EditarCodigosPostalesRes">
+    <wsdl:part name="Respuesta" element="tns:Respuesta" />
+  </wsdl:message>
+  <wsdl:message name="ServiceContract_EditarCodigoPostal_ErrorFault_FaultMessage">
+    <wsdl:part xmlns:q17="http://Intranet.ws.Model/2015/Error" name="detail" element="q17:Error" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerUsuarioFuncionesReq">
+    <wsdl:part name="FiltroUsuarioFuncion" element="tns:FiltroUsuarioFuncion" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerUsuarioFuncionesRes">
+    <wsdl:part name="UsuarioFunciones" element="tns:UsuarioFunciones" />
+  </wsdl:message>
+  <wsdl:message name="ServiceContract_ObtenerUsuarioFunciones_ErrorFault_FaultMessage">
+    <wsdl:part xmlns:q18="http://Intranet.ws.Model/2015/Error" name="detail" element="q18:Error" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerRolFuncionesReq">
+    <wsdl:part name="FiltroRolFuncion" element="tns:FiltroRolFuncion" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerRolFuncionesRes">
+    <wsdl:part name="RolFunciones" element="tns:RolFunciones" />
+  </wsdl:message>
+  <wsdl:message name="ServiceContract_ObtenerRolFunciones_ErrorFault_FaultMessage">
+    <wsdl:part xmlns:q19="http://Intranet.ws.Model/2015/Error" name="detail" element="q19:Error" />
+  </wsdl:message>
+  <wsdl:portType name="ServiceContract">
+    <wsdl:operation name="ObtenerUsuario">
+      <wsdl:input wsaw:Action="http://Intranet.ws.Model/2015/Catalogos/ServiceContract/ObtenerUsuario" name="ObtenerUsuarioReq" message="tns:ObtenerUsuarioReq" />
+      <wsdl:output wsaw:Action="http://Intranet.ws.Model/2015/Catalogos/ServiceContract/ObtenerUsuarioResponse" name="ObtenerUsuarioRes" message="tns:ObtenerUsuarioRes" />
+      <wsdl:fault wsaw:Action="http://Intranet.ws.Model/2015/Catalogos/ServiceContract/ObtenerUsuarioErrorFault" name="ErrorFault" message="tns:ServiceContract_ObtenerUsuario_ErrorFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerCountingEntities">
+      <wsdl:input wsaw:Action="http://Intranet.ws.Model/2015/Catalogos/ServiceContract/ObtenerCountingEntities" name="ObtenerCountingEntitiesReq" message="tns:ObtenerCountingEntitiesReq" />
+      <wsdl:output wsaw:Action="http://Intranet.ws.Model/2015/Catalogos/ServiceContract/ObtenerCountingEntitiesResponse" name="ObtenerCountingEntitiesRes" message="tns:ObtenerCountingEntitiesRes" />
+      <wsdl:fault wsaw:Action="http://Intranet.ws.Model/2015/Catalogos/ServiceContract/ObtenerCountingEntitiesErrorFault" name="ErrorFault" message="tns:ServiceContract_ObtenerCountingEntities_ErrorFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerPaises">
+      <wsdl:input wsaw:Action="http://Intranet.ws.Model/2015/Catalogos/ServiceContract/ObtenerPaises" name="ObtenerPaisesReq" message="tns:ObtenerPaisesReq" />
+      <wsdl:output wsaw:Action="http://Intranet.ws.Model/2015/Catalogos/ServiceContract/ObtenerPaisesResponse" name="ObtenerPaisesRes" message="tns:ObtenerPaisesRes" />
+      <wsdl:fault wsaw:Action="http://Intranet.ws.Model/2015/Catalogos/ServiceContract/ObtenerPaisesErrorFault" name="ErrorFault" message="tns:ServiceContract_ObtenerPaises_ErrorFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AgregarPais">
+      <wsdl:input wsaw:Action="http://Intranet.ws.Model/2015/Catalogos/ServiceContract/AgregarPais" name="AgregarPaisesReq" message="tns:AgregarPaisesReq" />
+      <wsdl:output wsaw:Action="http://Intranet.ws.Model/2015/Catalogos/ServiceContract/AgregarPaisResponse" name="AgregarPaisesRes" message="tns:AgregarPaisesRes" />
+      <wsdl:fault wsaw:Action="http://Intranet.ws.Model/2015/Catalogos/ServiceContract/AgregarPaisErrorFault" name="ErrorFault" message="tns:ServiceContract_AgregarPais_ErrorFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EditarPais">
+      <wsdl:input wsaw:Action="http://Intranet.ws.Model/2015/Catalogos/ServiceContract/EditarPais" name="EditarPaisesReq" message="tns:EditarPaisesReq" />
+      <wsdl:output wsaw:Action="http://Intranet.ws.Model/2015/Catalogos/ServiceContract/EditarPaisResponse" name="EditarPaisesRes" message="tns:EditarPaisesRes" />
+      <wsdl:fault wsaw:Action="http://Intranet.ws.Model/2015/Catalogos/ServiceContract/EditarPaisErrorFault" name="ErrorFault" message="tns:ServiceContract_EditarPais_ErrorFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerEstados">
+      <wsdl:input wsaw:Action="http://Intranet.ws.Model/2015/Catalogos/ServiceContract/ObtenerEstados" name="ObtenerEstadosReq" message="tns:ObtenerEstadosReq" />
+      <wsdl:output wsaw:Action="http://Intranet.ws.Model/2015/Catalogos/ServiceContract/ObtenerEstadosResponse" name="ObtenerEstadosRes" message="tns:ObtenerEstadosRes" />
+      <wsdl:fault wsaw:Action="http://Intranet.ws.Model/2015/Catalogos/ServiceContract/ObtenerEstadosErrorFault" name="ErrorFault" message="tns:ServiceContract_ObtenerEstados_ErrorFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AgregarEstado">
+      <wsdl:input wsaw:Action="http://Intranet.ws.Model/2015/Catalogos/ServiceContract/AgregarEstado" name="AgregarEstadosReq" message="tns:AgregarEstadosReq" />
+      <wsdl:output wsaw:Action="http://Intranet.ws.Model/2015/Catalogos/ServiceContract/AgregarEstadoResponse" name="AgregarEstadosRes" message="tns:AgregarEstadosRes" />
+      <wsdl:fault wsaw:Action="http://Intranet.ws.Model/2015/Catalogos/ServiceContract/AgregarEstadoErrorFault" name="ErrorFault" message="tns:ServiceContract_AgregarEstado_ErrorFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EditarEstado">
+      <wsdl:input wsaw:Action="http://Intranet.ws.Model/2015/Catalogos/ServiceContract/EditarEstado" name="EditarEstadosReq" message="tns:EditarEstadosReq" />
+      <wsdl:output wsaw:Action="http://Intranet.ws.Model/2015/Catalogos/ServiceContract/EditarEstadoResponse" name="EditarEstadosRes" message="tns:EditarEstadosRes" />
+      <wsdl:fault wsaw:Action="http://Intranet.ws.Model/2015/Catalogos/ServiceContract/EditarEstadoErrorFault" name="ErrorFault" message="tns:ServiceContract_EditarEstado_ErrorFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerMunicipios">
+      <wsdl:input wsaw:Action="http://Intranet.ws.Model/2015/Catalogos/ServiceContract/ObtenerMunicipios" name="ObtenerMunicipiosReq" message="tns:ObtenerMunicipiosReq" />
+      <wsdl:output wsaw:Action="http://Intranet.ws.Model/2015/Catalogos/ServiceContract/ObtenerMunicipiosResponse" name="ObtenerMunicipiosRes" message="tns:ObtenerMunicipiosRes" />
+      <wsdl:fault wsaw:Action="http://Intranet.ws.Model/2015/Catalogos/ServiceContract/ObtenerMunicipiosErrorFault" name="ErrorFault" message="tns:ServiceContract_ObtenerMunicipios_ErrorFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AgregarMunicipio">
+      <wsdl:input wsaw:Action="http://Intranet.ws.Model/2015/Catalogos/ServiceContract/AgregarMunicipio" name="AgregarMunicipiosReq" message="tns:AgregarMunicipiosReq" />
+      <wsdl:output wsaw:Action="http://Intranet.ws.Model/2015/Catalogos/ServiceContract/AgregarMunicipioResponse" name="AgregarMunicipiosRes" message="tns:AgregarMunicipiosRes" />
+      <wsdl:fault wsaw:Action="http://Intranet.ws.Model/2015/Catalogos/ServiceContract/AgregarMunicipioErrorFault" name="ErrorFault" message="tns:ServiceContract_AgregarMunicipio_ErrorFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EditarMunicipio">
+      <wsdl:input wsaw:Action="http://Intranet.ws.Model/2015/Catalogos/ServiceContract/EditarMunicipio" name="EditarMunicipiosReq" message="tns:EditarMunicipiosReq" />
+      <wsdl:output wsaw:Action="http://Intranet.ws.Model/2015/Catalogos/ServiceContract/EditarMunicipioResponse" name="EditarMunicipiosRes" message="tns:EditarMunicipiosRes" />
+      <wsdl:fault wsaw:Action="http://Intranet.ws.Model/2015/Catalogos/ServiceContract/EditarMunicipioErrorFault" name="ErrorFault" message="tns:ServiceContract_EditarMunicipio_ErrorFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerCiudades">
+      <wsdl:input wsaw:Action="http://Intranet.ws.Model/2015/Catalogos/ServiceContract/ObtenerCiudades" name="ObtenerCiudadesReq" message="tns:ObtenerCiudadesReq" />
+      <wsdl:output wsaw:Action="http://Intranet.ws.Model/2015/Catalogos/ServiceContract/ObtenerCiudadesResponse" name="ObtenerCiudadesRes" message="tns:ObtenerCiudadesRes" />
+      <wsdl:fault wsaw:Action="http://Intranet.ws.Model/2015/Catalogos/ServiceContract/ObtenerCiudadesErrorFault" name="ErrorFault" message="tns:ServiceContract_ObtenerCiudades_ErrorFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AgregarCiudad">
+      <wsdl:input wsaw:Action="http://Intranet.ws.Model/2015/Catalogos/ServiceContract/AgregarCiudad" name="AgregarCiudadesReq" message="tns:AgregarCiudadesReq" />
+      <wsdl:output wsaw:Action="http://Intranet.ws.Model/2015/Catalogos/ServiceContract/AgregarCiudadResponse" name="AgregarCiudadesRes" message="tns:AgregarCiudadesRes" />
+      <wsdl:fault wsaw:Action="http://Intranet.ws.Model/2015/Catalogos/ServiceContract/AgregarCiudadErrorFault" name="ErrorFault" message="tns:ServiceContract_AgregarCiudad_ErrorFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EditarCiudad">
+      <wsdl:input wsaw:Action="http://Intranet.ws.Model/2015/Catalogos/ServiceContract/EditarCiudad" name="EditarCiudadesReq" message="tns:EditarCiudadesReq" />
+      <wsdl:output wsaw:Action="http://Intranet.ws.Model/2015/Catalogos/ServiceContract/EditarCiudadResponse" name="EditarCiudadesRes" message="tns:EditarCiudadesRes" />
+      <wsdl:fault wsaw:Action="http://Intranet.ws.Model/2015/Catalogos/ServiceContract/EditarCiudadErrorFault" name="ErrorFault" message="tns:ServiceContract_EditarCiudad_ErrorFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerCodigosPostales">
+      <wsdl:input wsaw:Action="http://Intranet.ws.Model/2015/Catalogos/ServiceContract/ObtenerCodigosPostales" name="ObtenerCodigosPostalesReq" message="tns:ObtenerCodigosPostalesReq" />
+      <wsdl:output wsaw:Action="http://Intranet.ws.Model/2015/Catalogos/ServiceContract/ObtenerCodigosPostalesResponse" name="ObtenerCodigosPostalesRes" message="tns:ObtenerCodigosPostalesRes" />
+      <wsdl:fault wsaw:Action="http://Intranet.ws.Model/2015/Catalogos/ServiceContract/ObtenerCodigosPostalesErrorFault" name="ErrorFault" message="tns:ServiceContract_ObtenerCodigosPostales_ErrorFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AgregarCodigoPostal">
+      <wsdl:input wsaw:Action="http://Intranet.ws.Model/2015/Catalogos/ServiceContract/AgregarCodigoPostal" name="AgregarCodigosPostalesReq" message="tns:AgregarCodigosPostalesReq" />
+      <wsdl:output wsaw:Action="http://Intranet.ws.Model/2015/Catalogos/ServiceContract/AgregarCodigoPostalResponse" name="AgregarCodigosPostalesRes" message="tns:AgregarCodigosPostalesRes" />
+      <wsdl:fault wsaw:Action="http://Intranet.ws.Model/2015/Catalogos/ServiceContract/AgregarCodigoPostalErrorFault" name="ErrorFault" message="tns:ServiceContract_AgregarCodigoPostal_ErrorFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EditarCodigoPostal">
+      <wsdl:input wsaw:Action="http://Intranet.ws.Model/2015/Catalogos/ServiceContract/EditarCodigoPostal" name="EditarCodigosPostalesReq" message="tns:EditarCodigosPostalesReq" />
+      <wsdl:output wsaw:Action="http://Intranet.ws.Model/2015/Catalogos/ServiceContract/EditarCodigoPostalResponse" name="EditarCodigosPostalesRes" message="tns:EditarCodigosPostalesRes" />
+      <wsdl:fault wsaw:Action="http://Intranet.ws.Model/2015/Catalogos/ServiceContract/EditarCodigoPostalErrorFault" name="ErrorFault" message="tns:ServiceContract_EditarCodigoPostal_ErrorFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerUsuarioFunciones">
+      <wsdl:input wsaw:Action="http://Intranet.ws.Model/2015/Catalogos/ServiceContract/ObtenerUsuarioFunciones" name="ObtenerUsuarioFuncionesReq" message="tns:ObtenerUsuarioFuncionesReq" />
+      <wsdl:output wsaw:Action="http://Intranet.ws.Model/2015/Catalogos/ServiceContract/ObtenerUsuarioFuncionesResponse" name="ObtenerUsuarioFuncionesRes" message="tns:ObtenerUsuarioFuncionesRes" />
+      <wsdl:fault wsaw:Action="http://Intranet.ws.Model/2015/Catalogos/ServiceContract/ObtenerUsuarioFuncionesErrorFault" name="ErrorFault" message="tns:ServiceContract_ObtenerUsuarioFunciones_ErrorFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerRolFunciones">
+      <wsdl:input wsaw:Action="http://Intranet.ws.Model/2015/Catalogos/ServiceContract/ObtenerRolFunciones" name="ObtenerRolFuncionesReq" message="tns:ObtenerRolFuncionesReq" />
+      <wsdl:output wsaw:Action="http://Intranet.ws.Model/2015/Catalogos/ServiceContract/ObtenerRolFuncionesResponse" name="ObtenerRolFuncionesRes" message="tns:ObtenerRolFuncionesRes" />
+      <wsdl:fault wsaw:Action="http://Intranet.ws.Model/2015/Catalogos/ServiceContract/ObtenerRolFuncionesErrorFault" name="ErrorFault" message="tns:ServiceContract_ObtenerRolFunciones_ErrorFault_FaultMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="Endpoint1" type="tns:ServiceContract">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ObtenerUsuario">
+      <soap:operation soapAction="http://Intranet.ws.Model/2015/Catalogos/ServiceContract/ObtenerUsuario" style="document" />
+      <wsdl:input name="ObtenerUsuarioReq">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="ObtenerUsuarioRes">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ErrorFault">
+        <soap:fault use="literal" name="ErrorFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerCountingEntities">
+      <soap:operation soapAction="http://Intranet.ws.Model/2015/Catalogos/ServiceContract/ObtenerCountingEntities" style="document" />
+      <wsdl:input name="ObtenerCountingEntitiesReq">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="ObtenerCountingEntitiesRes">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ErrorFault">
+        <soap:fault use="literal" name="ErrorFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerPaises">
+      <soap:operation soapAction="http://Intranet.ws.Model/2015/Catalogos/ServiceContract/ObtenerPaises" style="document" />
+      <wsdl:input name="ObtenerPaisesReq">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="ObtenerPaisesRes">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ErrorFault">
+        <soap:fault use="literal" name="ErrorFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="AgregarPais">
+      <soap:operation soapAction="http://Intranet.ws.Model/2015/Catalogos/ServiceContract/AgregarPais" style="document" />
+      <wsdl:input name="AgregarPaisesReq">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="AgregarPaisesRes">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ErrorFault">
+        <soap:fault use="literal" name="ErrorFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="EditarPais">
+      <soap:operation soapAction="http://Intranet.ws.Model/2015/Catalogos/ServiceContract/EditarPais" style="document" />
+      <wsdl:input name="EditarPaisesReq">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="EditarPaisesRes">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ErrorFault">
+        <soap:fault use="literal" name="ErrorFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerEstados">
+      <soap:operation soapAction="http://Intranet.ws.Model/2015/Catalogos/ServiceContract/ObtenerEstados" style="document" />
+      <wsdl:input name="ObtenerEstadosReq">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="ObtenerEstadosRes">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ErrorFault">
+        <soap:fault use="literal" name="ErrorFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="AgregarEstado">
+      <soap:operation soapAction="http://Intranet.ws.Model/2015/Catalogos/ServiceContract/AgregarEstado" style="document" />
+      <wsdl:input name="AgregarEstadosReq">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="AgregarEstadosRes">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ErrorFault">
+        <soap:fault use="literal" name="ErrorFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="EditarEstado">
+      <soap:operation soapAction="http://Intranet.ws.Model/2015/Catalogos/ServiceContract/EditarEstado" style="document" />
+      <wsdl:input name="EditarEstadosReq">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="EditarEstadosRes">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ErrorFault">
+        <soap:fault use="literal" name="ErrorFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerMunicipios">
+      <soap:operation soapAction="http://Intranet.ws.Model/2015/Catalogos/ServiceContract/ObtenerMunicipios" style="document" />
+      <wsdl:input name="ObtenerMunicipiosReq">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="ObtenerMunicipiosRes">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ErrorFault">
+        <soap:fault use="literal" name="ErrorFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="AgregarMunicipio">
+      <soap:operation soapAction="http://Intranet.ws.Model/2015/Catalogos/ServiceContract/AgregarMunicipio" style="document" />
+      <wsdl:input name="AgregarMunicipiosReq">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="AgregarMunicipiosRes">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ErrorFault">
+        <soap:fault use="literal" name="ErrorFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="EditarMunicipio">
+      <soap:operation soapAction="http://Intranet.ws.Model/2015/Catalogos/ServiceContract/EditarMunicipio" style="document" />
+      <wsdl:input name="EditarMunicipiosReq">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="EditarMunicipiosRes">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ErrorFault">
+        <soap:fault use="literal" name="ErrorFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerCiudades">
+      <soap:operation soapAction="http://Intranet.ws.Model/2015/Catalogos/ServiceContract/ObtenerCiudades" style="document" />
+      <wsdl:input name="ObtenerCiudadesReq">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="ObtenerCiudadesRes">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ErrorFault">
+        <soap:fault use="literal" name="ErrorFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="AgregarCiudad">
+      <soap:operation soapAction="http://Intranet.ws.Model/2015/Catalogos/ServiceContract/AgregarCiudad" style="document" />
+      <wsdl:input name="AgregarCiudadesReq">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="AgregarCiudadesRes">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ErrorFault">
+        <soap:fault use="literal" name="ErrorFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="EditarCiudad">
+      <soap:operation soapAction="http://Intranet.ws.Model/2015/Catalogos/ServiceContract/EditarCiudad" style="document" />
+      <wsdl:input name="EditarCiudadesReq">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="EditarCiudadesRes">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ErrorFault">
+        <soap:fault use="literal" name="ErrorFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerCodigosPostales">
+      <soap:operation soapAction="http://Intranet.ws.Model/2015/Catalogos/ServiceContract/ObtenerCodigosPostales" style="document" />
+      <wsdl:input name="ObtenerCodigosPostalesReq">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="ObtenerCodigosPostalesRes">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ErrorFault">
+        <soap:fault use="literal" name="ErrorFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="AgregarCodigoPostal">
+      <soap:operation soapAction="http://Intranet.ws.Model/2015/Catalogos/ServiceContract/AgregarCodigoPostal" style="document" />
+      <wsdl:input name="AgregarCodigosPostalesReq">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="AgregarCodigosPostalesRes">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ErrorFault">
+        <soap:fault use="literal" name="ErrorFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="EditarCodigoPostal">
+      <soap:operation soapAction="http://Intranet.ws.Model/2015/Catalogos/ServiceContract/EditarCodigoPostal" style="document" />
+      <wsdl:input name="EditarCodigosPostalesReq">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="EditarCodigosPostalesRes">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ErrorFault">
+        <soap:fault use="literal" name="ErrorFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerUsuarioFunciones">
+      <soap:operation soapAction="http://Intranet.ws.Model/2015/Catalogos/ServiceContract/ObtenerUsuarioFunciones" style="document" />
+      <wsdl:input name="ObtenerUsuarioFuncionesReq">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="ObtenerUsuarioFuncionesRes">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ErrorFault">
+        <soap:fault use="literal" name="ErrorFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerRolFunciones">
+      <soap:operation soapAction="http://Intranet.ws.Model/2015/Catalogos/ServiceContract/ObtenerRolFunciones" style="document" />
+      <wsdl:input name="ObtenerRolFuncionesReq">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="ObtenerRolFuncionesRes">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ErrorFault">
+        <soap:fault use="literal" name="ErrorFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="IntranetSR">
+    <wsdl:port name="Endpoint1" binding="tns:Endpoint1">
+      <soap:address location="http://localhost:11874/Intranet.ws.Host/IntranetSR.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

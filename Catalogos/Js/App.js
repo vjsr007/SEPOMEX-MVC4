@@ -14,6 +14,7 @@
         });
     };
 
+
     var configBlockUI = function () {
         $.blockUI.defaults.css = {
             padding: '6px 0',

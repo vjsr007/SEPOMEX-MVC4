@@ -4,23 +4,43 @@
 
     var Paises = {};
     var postDataPais = {};
-    var grid;
     var modalPais;
 
+    var formID = "#frmPaises"
+    var $form = function (selector) { return $(formID).find(selector); }
+    var ctrls = {
+        get btnBuscar() { return $form('#btnBuscar') },
+        get frmPaises() { return $(formID) },
+        get opAgregar() { return $form("#opAgregar") },
+        get btnAgregar() { return $form("#btnAgregar") },
+        get opEditar() { return $form("#opEditar") },
+        get btnEditar() { return $form("#btnEditar") },
+        get grid() { return $form('#tblDatos') },
+        get pager() { return $form('#tblDatosPager') },
+        get txtNombre() { return $form('#txtNombre') },
+        get txtCodigo() { return $form('#txCodigo') },
+        get chkActivo() { return $form('#chkActivo') }
+    };
+    var urls = {
+        get EditarPais() { return window.webroot + "Catalogo/EditarPais" },
+        get AgregarPais() { return webroot + "Catalogo/AgregarPais" },
+        get PaisEditar() { return webroot + "Catalogo/PaisEditar" },
+    }
+
     var BuscarPaises = function () {
-        grid.jqGrid("clearGridData", true);
+        ctrls.grid.jqGrid("clearGridData", true);
 
         try {
 
             postDataPais = {
 	            PaisID : null,
-	            Nombre : $.trim($("#txtNombre").val())==''?null:$.trim($("#txtNombre").val()),
-	            Codigo: $.trim($("#txCodigo").val()) == '' ? null : $.trim($("#txCodigo").val()),
+	            Nombre: $.trim(ctrls.txtNombre.val()) == '' ? null : $.trim(ctrls.txtNombre.val()),
+	            Codigo: $.trim(ctrls.txtCodigo.val()) == '' ? null : $.trim(ctrls.txtCodigo.val()),
 	            Moneda: null,
 	            CodMoneda: null,
 	            FechaUltimaModificacion: '1900/01/01',
 	            UsuarioID: null,
-                Activo : $("#chkActivo").is(":checked")
+                Activo : ctrls.chkActivo.is(":checked")
             }
 
             AppData.obtenerPaises(postDataPais, function (data) {
@@ -37,9 +57,7 @@
     };
 
     var configurarGrid = function(){
-        grid = $("#tblDatos");
-
-        grid.jqGrid({
+        ctrls.grid.jqGrid({
             datatype: 'local',
             data: Paises,
             colNames: ['PaisID', 'Nombre', 'Codigo', 'Moneda', 'Codigo Moneda', 'Fecha U.', 'Usuario', 'Activo'],
@@ -108,7 +126,7 @@
                     editoptions: {value: "true:false"}
                 }
             ],
-            pager: $('#tblDatosPager'),
+            pager: ctrls.pager,
             rowNum: 10,
             loadui: 'disable',
             viewrecords: true,
@@ -127,16 +145,16 @@
     };
 
     var configurarGridPager = function(){
-        grid.jqGrid('navGrid', '#tblDatosPager', { search: false, refresh:false, del: false, add: true, edit: true },
+        ctrls.grid.jqGrid('navGrid', ctrls.pager, { search: false, refresh: false, del: false, add: true, edit: true },
             {
-                url: window.webroot + "Catalogo/EditarPais",
+                url: urls.EditarPais,
                 recreateForm: true,
                 modal: true,
                 width: "350",
                 beforeInitData: function () {
-                    grid.jqGrid('setColProp', 'PaisID', { editable: true, editrules: { required: true },editoptions:{} });
+                    ctrls.grid.jqGrid('setColProp', 'PaisID', { editable: true, editrules: { required: true }, editoptions: {} });
 
-                    var cm = grid.jqGrid('getColProp', 'PaisID');
+                    var cm = ctrls.grid.jqGrid('getColProp', 'PaisID');
                     cm.editoptions.disabled = true;
                 },
                 afterSubmit: function (response, postdata) {
@@ -159,14 +177,14 @@
                 closeAfterEdit: true
             },
             {
-                url: window.webroot + "Catalogo/AgregarPais",
+                url: urls.AgregarPais,
                 recreateForm: true,
                 modal: true,
                 width: "500",
                 beforeInitData: function () {
-                    grid.jqGrid('setColProp', 'PaisID', { editable: true, editrules: { required: false },editoptions:{} });
+                    ctrls.grid.jqGrid('setColProp', 'PaisID', { editable: true, editrules: { required: false }, editoptions: {} });
 
-                    var cm = grid.jqGrid('getColProp', 'PaisID');
+                    var cm = ctrls.grid.jqGrid('getColProp', 'PaisID');
                     cm.editoptions.disabled = true;
                 },
                 afterSubmit: function (response, postdata) {
@@ -192,23 +210,23 @@
     };
 
     var reloadGrid = function (data) {
-        grid.setGridParam(
+        ctrls.grid.setGridParam(
         {
             datatype: 'local',
             data: data
         });
-        grid.trigger("reloadGrid", [{ page: 1 }]);
+        ctrls.grid.trigger("reloadGrid", [{ page: 1 }]);
     };
 
     var mostrarEdicion = function (accion) {
-        var selRow = accion=="A" ? -1 : grid.jqGrid('getGridParam', 'selrow');
+        var selRow = accion == "A" ? -1 : ctrls.grid.jqGrid('getGridParam', 'selrow');
 
         if (selRow) {
             var titulo = accion == "A" ? "Agregar País" : "Editar País";
 
             modalPais = Utils.mostrarModal(
                             titulo,
-                            webroot + "Catalogo/PaisEditar",
+                            urls.PaisEditar,
                             { PaisID: selRow, Accion: accion },
                             {
                                 width: 350,
@@ -236,23 +254,21 @@
     }
 
     var enlazarEventos = function(){
-        $("#btnBuscar").click(function () {
-            BuscarPaises();
-        });
+        ctrls.btnBuscar.click(BuscarPaises);
 
-        $("#opAgregar").click(function(){
+        ctrls.opAgregar.click(function(){
             mostrarEdicion("A");
         });
 
-        $("#btnAgregar").click(function () {
+        ctrls.btnAgregar.click(function () {
             mostrarEdicion("A");
         });
 
-        $("#opEditar").click(function(){
+        ctrls.opEditar.click(function(){
             mostrarEdicion("E");
         });
 
-        $("#btnEditar").click(function () {
+        ctrls.btnEditar.click(function () {
             mostrarEdicion("E");
         });
     };

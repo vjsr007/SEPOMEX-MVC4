@@ -1,0 +1,109 @@
+﻿@model Catalogos.Models.Catalogos.PaisViewModel
+<script src="~/Scripts/Views/Catalogo/Catalogo.EditarPais.js"></script>    
+@using (Html.BeginForm("", "", FormMethod.Post, new { Id = "frmEditarPais", Role = "form" }))
+{
+    @Html.AntiForgeryToken()    
+    @Html.HiddenFor(model => model.Accion)
+    <div  class="row">
+        <div class="col-lg-6">
+            @Html.LabelFor(model => model.PaisID)
+        </div>
+        <div class="col-lg-6">
+            @Html.TextBoxFor(model => model.PaisID, new { Class="form-control", Readonly ="readonly" })
+        </div>
+        <div class="col-lg-12">
+            @Html.ValidationMessageFor(model => model.PaisID)
+        </div>
+    </div>
+    
+    <div  class="row">
+        <div class="col-lg-6">
+            @Html.LabelFor(model => model.Nombre)
+        </div>
+        <div class="col-lg-6">
+            @Html.TextBoxFor(model => model.Nombre, new { Class="form-control" })
+        </div>
+        <div class="col-lg-12">
+            @Html.ValidationMessageFor(model => model.Nombre)
+        </div>
+    </div>
+
+    <div  class="row">
+        <div class="col-lg-6">
+            @Html.LabelFor(model => model.Codigo)
+        </div>
+        <div class="col-lg-6">
+            @Html.TextBoxFor(model => model.Codigo, new { Class="form-control" })
+        </div>
+        <div class="col-lg-12">
+            @Html.ValidationMessageFor(model => model.Codigo)
+        </div>
+    </div>
+
+    <div  class="row">
+        <div class="col-lg-6">
+            @Html.LabelFor(model => model.Moneda)
+        </div>
+        <div class="col-lg-6">
+            @Html.TextBoxFor(model => model.Moneda, new { Class="form-control" })
+        </div>
+        <div class="col-lg-12">
+            @Html.ValidationMessageFor(model => model.Moneda)
+        </div>
+    </div>
+
+    <div  class="row">
+        <div class="col-lg-6">
+            @Html.LabelFor(model => model.CodMoneda)
+        </div>
+        <div class="col-lg-6">
+            @Html.TextBoxFor(model => model.CodMoneda, new { Class="form-control" })
+        </div>
+        <div class="col-lg-12">
+            @Html.ValidationMessageFor(model => model.CodMoneda)
+        </div>
+    </div>
+
+    <div  class="row">
+        <div class="col-lg-6">
+            @Html.LabelFor(model => model.FechaUltimaModificacion)
+        </div>
+        <div class="col-lg-6">
+            @Html.TextBoxFor(model => model.FechaUltimaModificacion, new { Class="form-control", Readonly ="readonly" })
+        </div>
+        <div class="col-lg-12">
+            @Html.ValidationMessageFor(model => model.FechaUltimaModificacion)
+        </div>
+    </div>
+
+    <div  class="row">
+        <div class="col-lg-6">
+            @Html.LabelFor(model => model.UsuarioID)
+        </div>
+        <div class="col-lg-6">
+            @Html.TextBoxFor(model => model.UsuarioID, new { Class="form-control", Readonly ="readonly" })
+        </div>
+        <div class="col-lg-12">
+            @Html.ValidationMessageFor(model => model.UsuarioID)
+        </div>
+    </div>
+    <div  class="row">
+        <div class="col-lg-12">            
+            @Html.CheckBox("Activo",Model.Activo==null?false:(bool)Model.Activo) <label for="Activo"> Activo</label>                      
+        </div>
+    </div>
+    <div class="row" style="border-bottom: 1px solid gray;">
+    </div>
+    <br />
+    <div  class="row">
+        <div class="col-lg-6">    
+            <button id="btnGuardar" type="button" class="btn btn-primary"><i class="fa fa-save"></i> Guardar</button>
+        </div>
+        <div class="col-lg-6">
+            <button id="btnCerrar" type="button" class="btn btn-warning"><i class="fa fa-close"></i> Cerrar</button>
+        </div>
+    </div>
+    <div id="frmErrores" style="display:none;">
+        @Html.ValidationSummary()
+    </div>
+}

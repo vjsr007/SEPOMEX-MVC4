@@ -1,0 +1,87 @@
+﻿@{ViewBag.Title = "País";}
+@section scripts {
+    <script src="~/Scripts/Views/Catalogo/Catalogo.Pais.js"></script>    
+}
+@using (Html.BeginForm("", "",FormMethod.Post , new { Enctype = "multipart/form-data" }))
+{
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <i class="fa fa-filter fa-fw"></i> Filtros
+                    <div class="pull-right">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                                Opciones
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu pull-right" role="menu">
+                                <li id="opAgregar"><a href="#">Agregar</a>
+                                </li>
+                                <li id="opEditar"><a href="#">Editar</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <label for="txCodigo" class="control-label">Codigo</label>
+                            <input type="text" class="form-control" id="txCodigo" maxlength="4" placeholder="Codigo del país" />
+                        </div>
+                        <div class="col-lg-5">
+                            <label for="txtNombre" class="control-label">Nombre</label>
+                            <input type="text" class="form-control" id="txtNombre" placeholder="Nombre del país" />
+                        </div>
+                        <div class="col-lg-2">
+                            <label></label>
+                            <div class="checkbox">                        
+                                <label>
+                                    <input id="chkActivo" checked="checked" type="checkbox" /> Activo
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-lg-1 pull-right">
+                            <button id="btnEditar" type="button" class="btn btn-primary"><i class="fa fa-edit"></i> Editar</button>
+                        </div>
+                        <div class="col-lg-1 pull-right">
+                            <button id="btnAgregar" type="button" class="btn btn-primary"><i class="fa fa-plus"></i> Agregar</button>
+                        </div>
+                        <div class="col-lg-1 pull-right">
+                            <button id="btnBuscar" type="button" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.panel-body -->
+            </div>
+        </div>
+        <!-- /.col-lg-8 -->
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <i class="fa fa-table fa-fw"></i> Paises
+                </div>
+                <!-- /.panel-heading -->
+                <div class="panel-body" style="overflow:scroll">
+                    <table id="tblDatos" style="width:99%;">
+                    </table>
+                    <div id="tblDatosPager" style="text-align: center;">
+                    </div>
+                </div>
+                <!-- /.panel-body -->
+            </div>
+        </div>
+        <!-- /.col-lg-8 -->
+    </div>
+</div>
+}
+<!-- /.row -->

@@ -1,0 +1,125 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Curso ASP.NET MVC - @ViewBag.Title</title>
+
+    <!-- JQgrid CSS -->
+    @Styles.Render("~/Content/jqgridCss")
+    <!-- Bootstrap Core CSS -->
+    @Styles.Render("~/Content/bootstrap")
+@*    <!-- MetisMenu CSS -->
+    @Styles.Render("~/Content/metisMenu")*@
+    <!-- Font Awesome -->
+    @Styles.Render("~/Content/custom")
+    <!-- Custom CSS -->
+    @Styles.Render("~/Content/font-awesome")
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        @Scripts.Render("~/bundles/html5shiv")
+        <script src="@Url.Content("~/")Scripts/respond.min.js"></script>
+    <![endif]-->
+    @Styles.Render("~/Content/theme")
+    @Styles.Render("~/Content/css")
+
+    <script>
+        var webroot = "@Url.Content("~/")";
+        var _names = @Html.Raw(Catalogos.Utils.Exportar.GetTranslations())
+            
+    </script>
+
+    <!-- jQuery -->
+    @Scripts.Render("~/bundles/jquery")
+    <!-- Bootstrap Core JavaScript -->
+    @Scripts.Render("~/bundles/bootstrapjs")
+    <!-- jQuery UI -->
+    @Scripts.Render("~/bundles/jqueryui")
+    <!-- BlockUI -->
+    @Scripts.Render("~/bundles/blockui")
+    <!-- Metis Menu Plugin JavaScript -->
+    @Scripts.Render("~/bundles/metisMenujs")
+    <!-- Custom Theme JavaScript -->
+    @Scripts.Render("~/bundles/customtheme")
+    <!-- JQGrid -->
+    @Scripts.Render("~/bundles/jqgrid")
+    <!-- Angular -->
+    @Scripts.Render("~/bundles/angular")
+    <!-- Utilerias -->
+    @Scripts.Render("~/bundles/utilerias")
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+        <!-- Navegación -->
+        <nav class="navbar navbar-default navbar-static-top primary" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Cambiar Navegación</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="@Url.Content("~/")"><i class="fa fa-windows fa-2x"></i> Curso ASP.NET MVC</a>
+            </div>
+            <!-- /.navbar-header -->
+            <ul class="nav navbar-top-links navbar-right">
+                <!-- /.dropdown -->
+                <li class="dropdown" style="float:right;">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="#">Idioma
+                            <select id="cmbIdioma">
+                                <option @(this.Session["Culture"].ToString().ToUpper() == "ES" ? "selected='selected'" : "") value="linkEs">Español</option>
+                                <option @(this.Session["Culture"].ToString().ToUpper()=="EN-GB"?"selected='selected'":"") value="linkEn">English</option>            
+                            </select>
+                            <div style="display:none">
+                                @Html.ActionLink("Español", "ChangeCulture", "Home", new { lang = "es", returnUrl = this.Request.RawUrl }, new { id = "linkEs" })</>
+                                @Html.ActionLink("English", "ChangeCulture", "Home", new {lang = "en-gb", returnUrl = this.Request.RawUrl }, new { id = "linkEn" })
+                            </div>
+                            </a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-user fa-fw"></i> Perfil</a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Opciones</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a href="@Url.Content("~/")Login/logOut"><i class="fa fa-sign-out fa-fw"></i> Salir</a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
+                <!-- /.dropdown -->
+                <li class="dropdown" style="float:right;">
+
+                <li />
+            </ul>
+            <!-- /.navbar-top-links -->
+
+            <!-- navigation top -->
+            @Html.Partial("Menu")
+        </nav>
+        
+        <div id="page-wrapper">
+            <div style="height: 5px;"></div>
+            @RenderBody()
+            @RenderSection("scripts", required: false)
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+</body>
+
+</html>

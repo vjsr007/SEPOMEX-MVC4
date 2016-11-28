@@ -1,0 +1,29 @@
+﻿@model Catalogos.Models.Login.UsuarioViewModel
+@{
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+    ViewBag.Title = "Acceso";
+}
+@section scripts {
+    <script src="~/Scripts/Views/Login/Login.Index.js"></script>
+}
+@using (Html.BeginForm("ajaxLogin", "Login", FormMethod.Post, new { Id = "frmLogin" }))
+{
+	<div id="main">
+		<h3><i class="fa fa-windows fa-2x"></i> Curso ASP.NET MVC</h3>
+		<div id="box">
+                
+            @Html.LabelFor(m => m.nombre, "Usuario")
+            @Html.TextBoxFor(m => m.nombre, new { Placeholder = "Usuario", Name = "nombre", Id = "nombre", Class = "input form-control" })
+			@Html.LabelFor(m => m.password, "Contraseña")
+            @Html.PasswordFor(m => m.password, new { Placeholder = "Contraseña", Name = "password", Id = "password", Class = "input form-control" })
+
+			<input type="button" class="button button-primary" value="Ingresar" id="btnLogin"/>
+				
+			<span class='msg'></span> 
+			<div id="error">  </div>
+		</div>
+    </div>        
+    <div id="frmErrores">
+        @Html.ValidationSummary()
+    </div>
+}

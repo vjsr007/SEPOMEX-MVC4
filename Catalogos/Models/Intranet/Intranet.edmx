@@ -1,0 +1,1142 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="IntranetModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityType Name="Funcion">
+          <Key>
+            <PropertyRef Name="FuncionID" />
+          </Key>
+          <Property Name="FuncionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FuncionPadreID" Type="int" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="100" />
+          <Property Name="Url" Type="nvarchar" MaxLength="2000" />
+          <Property Name="TipoFuncionID" Type="int" Nullable="false" />
+          <Property Name="Activo" Type="bit" Nullable="false" />
+          <Property Name="Metadata" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Orden" Type="int" />
+        </EntityType>
+        <EntityType Name="Rol">
+          <Key>
+            <PropertyRef Name="RolID" />
+          </Key>
+          <Property Name="RolID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Activo" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RolFuncion">
+          <Key>
+            <PropertyRef Name="RolFuncionID" />
+          </Key>
+          <Property Name="RolFuncionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RolID" Type="int" Nullable="false" />
+          <Property Name="FuncionID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipoFuncion">
+          <Key>
+            <PropertyRef Name="TipoFuncionID" />
+          </Key>
+          <Property Name="TipoFuncionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Intranet.dbo.tmpUsuarios' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="tmpUsuarios">
+          <Key>
+            <PropertyRef Name="UsuarioID" />
+            <PropertyRef Name="Nombre" />
+            <PropertyRef Name="RolID" />
+            <PropertyRef Name="Rol" />
+          </Key>
+          <Property Name="UsuarioID" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="RolID" Type="int" Nullable="false" />
+          <Property Name="Rol" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="UsuarioID" />
+          </Key>
+          <Property Name="UsuarioID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Pass" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Activo" Type="bit" Nullable="false" />
+          <Property Name="Recordarme" Type="bit" />
+          <Property Name="Foto" Type="nvarchar" MaxLength="4000" />
+          <Property Name="NombreCompleto" Type="nvarchar" MaxLength="1000" />
+        </EntityType>
+        <EntityType Name="UsuarioRol">
+          <Key>
+            <PropertyRef Name="UsuarioRolID" />
+          </Key>
+          <Property Name="UsuarioRolID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UsuarioID" Type="int" Nullable="false" />
+          <Property Name="RolID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ciudad">
+          <Key>
+            <PropertyRef Name="CiudadID" />
+          </Key>
+          <Property Name="CiudadID" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="500" />
+          <Property Name="EstadoID" Type="int" />
+          <Property Name="MunicipioID" Type="int" />
+          <Property Name="FechaUltimaModificacion" Type="datetime" />
+          <Property Name="UsuarioID" Type="int" />
+          <Property Name="Activo" Type="bit" />
+        </EntityType>
+        <EntityType Name="CodigoPostal">
+          <Key>
+            <PropertyRef Name="CodigoPostalID" />
+          </Key>
+          <Property Name="CodigoPostalID" Type="int" Nullable="false" />
+          <Property Name="CodigoPostal" Type="nvarchar" MaxLength="255" />
+          <Property Name="MunicipioID" Type="int" />
+          <Property Name="CiudadID" Type="int" />
+          <Property Name="Asentamiento" Type="nvarchar" MaxLength="255" />
+          <Property Name="TipoAsentamiento" Type="nvarchar" MaxLength="255" />
+          <Property Name="Zona" Type="nvarchar" MaxLength="255" />
+          <Property Name="FechaUltimaModificacion" Type="datetime" />
+          <Property Name="UsuarioID" Type="int" />
+          <Property Name="Activo" Type="bit" />
+        </EntityType>
+        <EntityType Name="Estado">
+          <Key>
+            <PropertyRef Name="EstadoID" />
+          </Key>
+          <Property Name="EstadoID" Type="int" Nullable="false" />
+          <Property Name="Codigo" Type="varchar" MaxLength="5" />
+          <Property Name="Nombre" Type="varchar" MaxLength="500" />
+          <Property Name="PaisID" Type="int" Nullable="false" />
+          <Property Name="FechaUltimaModificacion" Type="datetime" />
+          <Property Name="UsuarioID" Type="int" />
+          <Property Name="Activo" Type="bit" />
+        </EntityType>
+        <EntityType Name="Municipio">
+          <Key>
+            <PropertyRef Name="MunicipioID" />
+          </Key>
+          <Property Name="MunicipioID" Type="int" Nullable="false" />
+          <Property Name="Codigo" Type="varchar" MaxLength="4" />
+          <Property Name="Nombre" Type="varchar" MaxLength="500" />
+          <Property Name="EstadoID" Type="int" />
+          <Property Name="FechaUltimaModificacion" Type="datetime" />
+          <Property Name="UsuarioID" Type="int" />
+          <Property Name="Activo" Type="bit" />
+        </EntityType>
+        <EntityType Name="Pais">
+          <Key>
+            <PropertyRef Name="PaisID" />
+          </Key>
+          <Property Name="PaisID" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="100" />
+          <Property Name="Codigo" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="Moneda" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="CodMoneda" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="FechaUltimaModificacion" Type="datetime" />
+          <Property Name="UsuarioID" Type="int" />
+          <Property Name="Activo" Type="bit" />
+        </EntityType>
+        <Association Name="FK_Estado_Municipio">
+          <End Role="Estado" Type="Self.Estado" Multiplicity="0..1" />
+          <End Role="Municipio" Type="Self.Municipio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estado">
+              <PropertyRef Name="EstadoID" />
+            </Principal>
+            <Dependent Role="Municipio">
+              <PropertyRef Name="EstadoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="spCountingEntities" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="spObtenerFunciones" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FuncionID" Type="int" Mode="In" />
+          <Parameter Name="FuncionPadreID" Type="int" Mode="In" />
+          <Parameter Name="Nombre" Type="varchar" Mode="In" />
+          <Parameter Name="Descripcion" Type="varchar" Mode="In" />
+          <Parameter Name="Url" Type="varchar" Mode="In" />
+          <Parameter Name="TipoFuncionID" Type="int" Mode="In" />
+          <Parameter Name="Activo" Type="bit" Mode="In" />
+          <Parameter Name="TipoFuncion" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="spObtenerRoles" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="spObtenerRolFunciones" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="RolID" Type="int" Mode="In" />
+          <Parameter Name="Rol" Type="varchar" Mode="In" />
+          <Parameter Name="RolActivo" Type="bit" Mode="In" />
+          <Parameter Name="FuncionID" Type="int" Mode="In" />
+          <Parameter Name="FuncionPadreID" Type="int" Mode="In" />
+          <Parameter Name="Funcion" Type="varchar" Mode="In" />
+          <Parameter Name="FuncionDescripcion" Type="varchar" Mode="In" />
+          <Parameter Name="Url" Type="varchar" Mode="In" />
+          <Parameter Name="TipoFuncionID" Type="int" Mode="In" />
+          <Parameter Name="FuncionActivo" Type="bit" Mode="In" />
+          <Parameter Name="TipoFuncion" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="spObtenerUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="nombre" Type="nvarchar" Mode="In" />
+          <Parameter Name="pass" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="spObtenerUsuarioFunciones" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UsuarioID" Type="int" Mode="In" />
+          <Parameter Name="Nombre" Type="varchar" Mode="In" />
+          <Parameter Name="RolID" Type="int" Mode="In" />
+          <Parameter Name="RolActivo" Type="bit" Mode="In" />
+          <Parameter Name="Activo" Type="bit" Mode="In" />
+          <Parameter Name="FuncionActivo" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="spAgregarCiudades" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="sepomex">
+          <Parameter Name="MunicipioID" Type="int" Mode="In" />
+          <Parameter Name="Nombre" Type="varchar" Mode="In" />
+          <Parameter Name="EstadoID" Type="int" Mode="In" />
+          <Parameter Name="Activo" Type="bit" Mode="In" />
+          <Parameter Name="UsuarioID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spAgregarCodigosPostales" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="sepomex">
+          <Parameter Name="CodigoPostal" Type="varchar" Mode="In" />
+          <Parameter Name="TipoAsentamiento" Type="varchar" Mode="In" />
+          <Parameter Name="Asentamiento" Type="varchar" Mode="In" />
+          <Parameter Name="Zona" Type="varchar" Mode="In" />
+          <Parameter Name="MunicipioID" Type="int" Mode="In" />
+          <Parameter Name="CiudadId" Type="int" Mode="In" />
+          <Parameter Name="Activo" Type="bit" Mode="In" />
+          <Parameter Name="UsuarioID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spAgregarEstados" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="sepomex">
+          <Parameter Name="Codigo" Type="varchar" Mode="In" />
+          <Parameter Name="Nombre" Type="varchar" Mode="In" />
+          <Parameter Name="PaisID" Type="int" Mode="In" />
+          <Parameter Name="UsuarioID" Type="int" Mode="In" />
+          <Parameter Name="Activo" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="spAgregarMunicipios" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="sepomex">
+          <Parameter Name="Codigo" Type="varchar" Mode="In" />
+          <Parameter Name="Nombre" Type="varchar" Mode="In" />
+          <Parameter Name="EstadoID" Type="int" Mode="In" />
+          <Parameter Name="Activo" Type="bit" Mode="In" />
+          <Parameter Name="UsuarioID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spAgregarPais" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="sepomex">
+          <Parameter Name="Nombre" Type="varchar" Mode="In" />
+          <Parameter Name="Codigo" Type="varchar" Mode="In" />
+          <Parameter Name="Moneda" Type="varchar" Mode="In" />
+          <Parameter Name="CodMoneda" Type="varchar" Mode="In" />
+          <Parameter Name="UsuarioID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spEditarCiudades" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="sepomex">
+          <Parameter Name="CiudadID" Type="int" Mode="In" />
+          <Parameter Name="MunicipioID" Type="int" Mode="In" />
+          <Parameter Name="Nombre" Type="varchar" Mode="In" />
+          <Parameter Name="EstadoID" Type="int" Mode="In" />
+          <Parameter Name="Activo" Type="bit" Mode="In" />
+          <Parameter Name="UsuarioID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spEditarCodigosPostales" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="sepomex">
+          <Parameter Name="CodigoPostalID" Type="int" Mode="In" />
+          <Parameter Name="CodigoPostal" Type="varchar" Mode="In" />
+          <Parameter Name="TipoAsentamiento" Type="varchar" Mode="In" />
+          <Parameter Name="Asentamiento" Type="varchar" Mode="In" />
+          <Parameter Name="Zona" Type="varchar" Mode="In" />
+          <Parameter Name="MunicipioID" Type="int" Mode="In" />
+          <Parameter Name="CiudadId" Type="int" Mode="In" />
+          <Parameter Name="Activo" Type="bit" Mode="In" />
+          <Parameter Name="UsuarioID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spEditarEstados" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="sepomex">
+          <Parameter Name="EstadoID" Type="int" Mode="In" />
+          <Parameter Name="Codigo" Type="varchar" Mode="In" />
+          <Parameter Name="Nombre" Type="varchar" Mode="In" />
+          <Parameter Name="PaisID" Type="int" Mode="In" />
+          <Parameter Name="UsuarioID" Type="int" Mode="In" />
+          <Parameter Name="Activo" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="spEditarMunicipios" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="sepomex">
+          <Parameter Name="MunicipioID" Type="int" Mode="In" />
+          <Parameter Name="Codigo" Type="varchar" Mode="In" />
+          <Parameter Name="Nombre" Type="varchar" Mode="In" />
+          <Parameter Name="EstadoID" Type="int" Mode="In" />
+          <Parameter Name="Activo" Type="bit" Mode="In" />
+          <Parameter Name="UsuarioID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spEditarPais" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="sepomex">
+          <Parameter Name="PaisID" Type="int" Mode="In" />
+          <Parameter Name="Nombre" Type="varchar" Mode="In" />
+          <Parameter Name="Codigo" Type="varchar" Mode="In" />
+          <Parameter Name="Moneda" Type="varchar" Mode="In" />
+          <Parameter Name="CodMoneda" Type="varchar" Mode="In" />
+          <Parameter Name="UsuarioID" Type="int" Mode="In" />
+          <Parameter Name="Activo" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="spObtenerCiudades" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="sepomex">
+          <Parameter Name="CiudadID" Type="int" Mode="In" />
+          <Parameter Name="MunicipioID" Type="int" Mode="In" />
+          <Parameter Name="Nombre" Type="varchar" Mode="In" />
+          <Parameter Name="EstadoID" Type="int" Mode="In" />
+          <Parameter Name="Activo" Type="bit" Mode="In" />
+          <Parameter Name="PaisID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spObtenerCodigosPostales" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="sepomex">
+          <Parameter Name="CodigoPostal" Type="varchar" Mode="In" />
+          <Parameter Name="TipoAsentamiento" Type="varchar" Mode="In" />
+          <Parameter Name="Asentamiento" Type="varchar" Mode="In" />
+          <Parameter Name="Zona" Type="varchar" Mode="In" />
+          <Parameter Name="MunicipioID" Type="int" Mode="In" />
+          <Parameter Name="CiudadId" Type="int" Mode="In" />
+          <Parameter Name="EstadoID" Type="int" Mode="In" />
+          <Parameter Name="Activo" Type="bit" Mode="In" />
+          <Parameter Name="PaisID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spObtenerEstados" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="sepomex">
+          <Parameter Name="EstadoID" Type="int" Mode="In" />
+          <Parameter Name="Codigo" Type="varchar" Mode="In" />
+          <Parameter Name="Nombre" Type="varchar" Mode="In" />
+          <Parameter Name="PaisID" Type="int" Mode="In" />
+          <Parameter Name="Activo" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="spObtenerMunicipios" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="sepomex">
+          <Parameter Name="MunicipioID" Type="int" Mode="In" />
+          <Parameter Name="Codigo" Type="varchar" Mode="In" />
+          <Parameter Name="Nombre" Type="varchar" Mode="In" />
+          <Parameter Name="EstadoID" Type="int" Mode="In" />
+          <Parameter Name="Activo" Type="bit" Mode="In" />
+          <Parameter Name="PaisID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spObtenerPaises" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="sepomex">
+          <Parameter Name="Activo" Type="bit" Mode="In" />
+          <Parameter Name="Nombre" Type="varchar" Mode="In" />
+          <Parameter Name="Codigo" Type="varchar" Mode="In" />
+          <Parameter Name="PaisID" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="IntranetModelStoreContainer">
+          <EntitySet Name="Funcion" EntityType="Self.Funcion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rol" EntityType="Self.Rol" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RolFuncion" EntityType="Self.RolFuncion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoFuncion" EntityType="Self.TipoFuncion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UsuarioRol" EntityType="Self.UsuarioRol" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ciudad" EntityType="Self.Ciudad" Schema="sepomex" store:Type="Tables" />
+          <EntitySet Name="CodigoPostal" EntityType="Self.CodigoPostal" Schema="sepomex" store:Type="Tables" />
+          <EntitySet Name="Estado" EntityType="Self.Estado" Schema="sepomex" store:Type="Tables" />
+          <EntitySet Name="Municipio" EntityType="Self.Municipio" Schema="sepomex" store:Type="Tables" />
+          <EntitySet Name="Pais" EntityType="Self.Pais" Schema="sepomex" store:Type="Tables" />
+          <EntitySet Name="tmpUsuarios" EntityType="Self.tmpUsuarios" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[tmpUsuarios].[UsuarioID] AS [UsuarioID], 
+[tmpUsuarios].[Nombre] AS [Nombre], 
+[tmpUsuarios].[RolID] AS [RolID], 
+[tmpUsuarios].[Rol] AS [Rol]
+FROM [dbo].[tmpUsuarios] AS [tmpUsuarios]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Estado_Municipio" Association="Self.FK_Estado_Municipio">
+            <End Role="Estado" EntitySet="Estado" />
+            <End Role="Municipio" EntitySet="Municipio" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="IntranetModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityType Name="Funcion">
+          <Key>
+            <PropertyRef Name="FuncionID" />
+          </Key>
+          <Property Name="FuncionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FuncionPadreID" Type="Int32" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Url" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="TipoFuncionID" Type="Int32" Nullable="false" />
+          <Property Name="Activo" Type="Boolean" Nullable="false" />
+          <Property Name="Metadata" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Orden" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Rol">
+          <Key>
+            <PropertyRef Name="RolID" />
+          </Key>
+          <Property Name="RolID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Activo" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RolFuncion">
+          <Key>
+            <PropertyRef Name="RolFuncionID" />
+          </Key>
+          <Property Name="RolFuncionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RolID" Type="Int32" Nullable="false" />
+          <Property Name="FuncionID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipoFuncion">
+          <Key>
+            <PropertyRef Name="TipoFuncionID" />
+          </Key>
+          <Property Name="TipoFuncionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="UsuarioID" />
+          </Key>
+          <Property Name="UsuarioID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Pass" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Activo" Type="Boolean" Nullable="false" />
+          <Property Name="Recordarme" Type="Boolean" />
+          <Property Name="Foto" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="NombreCompleto" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="UsuarioRol">
+          <Key>
+            <PropertyRef Name="UsuarioRolID" />
+          </Key>
+          <Property Name="UsuarioRolID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UsuarioID" Type="Int32" Nullable="false" />
+          <Property Name="RolID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ciudad">
+          <Key>
+            <PropertyRef Name="CiudadID" />
+          </Key>
+          <Property Name="CiudadID" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="EstadoID" Type="Int32" />
+          <Property Name="MunicipioID" Type="Int32" />
+          <Property Name="FechaUltimaModificacion" Type="DateTime" Precision="3" />
+          <Property Name="UsuarioID" Type="Int32" />
+          <Property Name="Activo" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="CodigoPostal">
+          <Key>
+            <PropertyRef Name="CodigoPostalID" />
+          </Key>
+          <Property Name="CodigoPostalID" Type="Int32" Nullable="false" />
+          <Property Name="CodigoPostal1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="MunicipioID" Type="Int32" />
+          <Property Name="CiudadID" Type="Int32" />
+          <Property Name="Asentamiento" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="TipoAsentamiento" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Zona" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="FechaUltimaModificacion" Type="DateTime" Precision="3" />
+          <Property Name="UsuarioID" Type="Int32" />
+          <Property Name="Activo" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Estado">
+          <Key>
+            <PropertyRef Name="EstadoID" />
+          </Key>
+          <Property Name="EstadoID" Type="Int32" Nullable="false" />
+          <Property Name="Codigo" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="Nombre" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="PaisID" Type="Int32" Nullable="false" />
+          <Property Name="FechaUltimaModificacion" Type="DateTime" Precision="3" />
+          <Property Name="UsuarioID" Type="Int32" />
+          <Property Name="Activo" Type="Boolean" />
+          <NavigationProperty Name="Municipio" Relationship="Self.FK_Estado_Municipio" FromRole="Estado" ToRole="Municipio" />
+        </EntityType>
+        <EntityType Name="Municipio">
+          <Key>
+            <PropertyRef Name="MunicipioID" />
+          </Key>
+          <Property Name="MunicipioID" Type="Int32" Nullable="false" />
+          <Property Name="Codigo" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="Nombre" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="EstadoID" Type="Int32" />
+          <Property Name="FechaUltimaModificacion" Type="DateTime" Precision="3" />
+          <Property Name="UsuarioID" Type="Int32" />
+          <Property Name="Activo" Type="Boolean" />
+          <NavigationProperty Name="Estado" Relationship="Self.FK_Estado_Municipio" FromRole="Municipio" ToRole="Estado" />
+        </EntityType>
+        <EntityType Name="Pais">
+          <Key>
+            <PropertyRef Name="PaisID" />
+          </Key>
+          <Property Name="PaisID" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Codigo" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Moneda" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CodMoneda" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FechaUltimaModificacion" Type="DateTime" Precision="3" />
+          <Property Name="UsuarioID" Type="Int32" />
+          <Property Name="Activo" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="tmpUsuarios">
+          <Key>
+            <PropertyRef Name="UsuarioID" />
+            <PropertyRef Name="Nombre" />
+            <PropertyRef Name="RolID" />
+            <PropertyRef Name="Rol" />
+          </Key>
+          <Property Name="UsuarioID" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RolID" Type="Int32" Nullable="false" />
+          <Property Name="Rol" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Estado_Municipio">
+          <End Role="Estado" Type="Self.Estado" Multiplicity="0..1" />
+          <End Role="Municipio" Type="Self.Municipio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estado">
+              <PropertyRef Name="EstadoID" />
+            </Principal>
+            <Dependent Role="Municipio">
+              <PropertyRef Name="EstadoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="IntranetEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Funcion" EntityType="Self.Funcion" />
+          <EntitySet Name="Rol" EntityType="Self.Rol" />
+          <EntitySet Name="RolFuncion" EntityType="Self.RolFuncion" />
+          <EntitySet Name="TipoFuncion" EntityType="Self.TipoFuncion" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" />
+          <EntitySet Name="UsuarioRol" EntityType="Self.UsuarioRol" />
+          <EntitySet Name="Ciudad" EntityType="Self.Ciudad" />
+          <EntitySet Name="CodigoPostal" EntityType="Self.CodigoPostal" />
+          <EntitySet Name="Estado" EntityType="Self.Estado" />
+          <EntitySet Name="Municipio" EntityType="Self.Municipio" />
+          <EntitySet Name="Pais" EntityType="Self.Pais" />
+          <EntitySet Name="tmpUsuarios" EntityType="Self.tmpUsuarios" />
+          <AssociationSet Name="FK_Estado_Municipio" Association="Self.FK_Estado_Municipio">
+            <End Role="Estado" EntitySet="Estado" />
+            <End Role="Municipio" EntitySet="Municipio" />
+          </AssociationSet>
+          <FunctionImport Name="spCountingEntities" ReturnType="Collection(IntranetModel.spCountingEntities_Result)" />
+          <FunctionImport Name="spObtenerFunciones" ReturnType="Collection(IntranetModel.spObtenerFunciones_Result)">
+            <Parameter Name="FuncionID" Mode="In" Type="Int32" />
+            <Parameter Name="FuncionPadreID" Mode="In" Type="Int32" />
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="Descripcion" Mode="In" Type="String" />
+            <Parameter Name="Url" Mode="In" Type="String" />
+            <Parameter Name="TipoFuncionID" Mode="In" Type="Int32" />
+            <Parameter Name="Activo" Mode="In" Type="Boolean" />
+            <Parameter Name="TipoFuncion" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="spObtenerRoles" ReturnType="Collection(IntranetModel.spObtenerRoles_Result)" />
+          <FunctionImport Name="spObtenerRolFunciones" ReturnType="Collection(IntranetModel.spObtenerRolFunciones_Result)">
+            <Parameter Name="RolID" Mode="In" Type="Int32" />
+            <Parameter Name="Rol" Mode="In" Type="String" />
+            <Parameter Name="RolActivo" Mode="In" Type="Boolean" />
+            <Parameter Name="FuncionID" Mode="In" Type="Int32" />
+            <Parameter Name="FuncionPadreID" Mode="In" Type="Int32" />
+            <Parameter Name="Funcion" Mode="In" Type="String" />
+            <Parameter Name="FuncionDescripcion" Mode="In" Type="String" />
+            <Parameter Name="Url" Mode="In" Type="String" />
+            <Parameter Name="TipoFuncionID" Mode="In" Type="Int32" />
+            <Parameter Name="FuncionActivo" Mode="In" Type="Boolean" />
+            <Parameter Name="TipoFuncion" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="spObtenerUsuario" ReturnType="Collection(IntranetModel.spObtenerUsuario_Result)">
+            <Parameter Name="nombre" Mode="In" Type="String" />
+            <Parameter Name="pass" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="spObtenerCiudades" ReturnType="Collection(IntranetModel.spObtenerCiudades_Result)">
+            <Parameter Name="CiudadID" Mode="In" Type="Int32" />
+            <Parameter Name="MunicipioID" Mode="In" Type="Int32" />
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="EstadoID" Mode="In" Type="Int32" />
+            <Parameter Name="Activo" Mode="In" Type="Boolean" />
+            <Parameter Name="PaisID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spObtenerCodigosPostales" ReturnType="Collection(IntranetModel.spObtenerCodigosPostales_Result)">
+            <Parameter Name="CodigoPostal" Mode="In" Type="String" />
+            <Parameter Name="TipoAsentamiento" Mode="In" Type="String" />
+            <Parameter Name="Asentamiento" Mode="In" Type="String" />
+            <Parameter Name="Zona" Mode="In" Type="String" />
+            <Parameter Name="MunicipioID" Mode="In" Type="Int32" />
+            <Parameter Name="CiudadId" Mode="In" Type="Int32" />
+            <Parameter Name="EstadoID" Mode="In" Type="Int32" />
+            <Parameter Name="Activo" Mode="In" Type="Boolean" />
+            <Parameter Name="PaisID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spObtenerEstados" ReturnType="Collection(IntranetModel.spObtenerEstados_Result)">
+            <Parameter Name="EstadoID" Mode="In" Type="Int32" />
+            <Parameter Name="Codigo" Mode="In" Type="String" />
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="PaisID" Mode="In" Type="Int32" />
+            <Parameter Name="Activo" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="spObtenerMunicipios" ReturnType="Collection(IntranetModel.spObtenerMunicipios_Result)">
+            <Parameter Name="MunicipioID" Mode="In" Type="Int32" />
+            <Parameter Name="Codigo" Mode="In" Type="String" />
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="EstadoID" Mode="In" Type="Int32" />
+            <Parameter Name="Activo" Mode="In" Type="Boolean" />
+            <Parameter Name="PaisID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spObtenerPaises" ReturnType="Collection(IntranetModel.spObtenerPaises_Result)">
+            <Parameter Name="Activo" Mode="In" Type="Boolean" />
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="Codigo" Mode="In" Type="String" />
+            <Parameter Name="PaisID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spEditarPais">
+            <Parameter Name="PaisID" Mode="In" Type="Int32" />
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="Codigo" Mode="In" Type="String" />
+            <Parameter Name="Moneda" Mode="In" Type="String" />
+            <Parameter Name="CodMoneda" Mode="In" Type="String" />
+            <Parameter Name="UsuarioID" Mode="In" Type="Int32" />
+            <Parameter Name="Activo" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="spAgregarCiudades">
+            <Parameter Name="MunicipioID" Mode="In" Type="Int32" />
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="EstadoID" Mode="In" Type="Int32" />
+            <Parameter Name="Activo" Mode="In" Type="Boolean" />
+            <Parameter Name="UsuarioID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spAgregarCodigosPostales">
+            <Parameter Name="CodigoPostal" Mode="In" Type="String" />
+            <Parameter Name="TipoAsentamiento" Mode="In" Type="String" />
+            <Parameter Name="Asentamiento" Mode="In" Type="String" />
+            <Parameter Name="Zona" Mode="In" Type="String" />
+            <Parameter Name="MunicipioID" Mode="In" Type="Int32" />
+            <Parameter Name="CiudadId" Mode="In" Type="Int32" />
+            <Parameter Name="Activo" Mode="In" Type="Boolean" />
+            <Parameter Name="UsuarioID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spAgregarEstados">
+            <Parameter Name="Codigo" Mode="In" Type="String" />
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="PaisID" Mode="In" Type="Int32" />
+            <Parameter Name="UsuarioID" Mode="In" Type="Int32" />
+            <Parameter Name="Activo" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="spAgregarMunicipios">
+            <Parameter Name="Codigo" Mode="In" Type="String" />
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="EstadoID" Mode="In" Type="Int32" />
+            <Parameter Name="Activo" Mode="In" Type="Boolean" />
+            <Parameter Name="UsuarioID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spAgregarPais">
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="Codigo" Mode="In" Type="String" />
+            <Parameter Name="Moneda" Mode="In" Type="String" />
+            <Parameter Name="CodMoneda" Mode="In" Type="String" />
+            <Parameter Name="UsuarioID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spEditarCiudades">
+            <Parameter Name="CiudadID" Mode="In" Type="Int32" />
+            <Parameter Name="MunicipioID" Mode="In" Type="Int32" />
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="EstadoID" Mode="In" Type="Int32" />
+            <Parameter Name="Activo" Mode="In" Type="Boolean" />
+            <Parameter Name="UsuarioID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spEditarCodigosPostales">
+            <Parameter Name="CodigoPostalID" Mode="In" Type="Int32" />
+            <Parameter Name="CodigoPostal" Mode="In" Type="String" />
+            <Parameter Name="TipoAsentamiento" Mode="In" Type="String" />
+            <Parameter Name="Asentamiento" Mode="In" Type="String" />
+            <Parameter Name="Zona" Mode="In" Type="String" />
+            <Parameter Name="MunicipioID" Mode="In" Type="Int32" />
+            <Parameter Name="CiudadId" Mode="In" Type="Int32" />
+            <Parameter Name="Activo" Mode="In" Type="Boolean" />
+            <Parameter Name="UsuarioID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spEditarEstados">
+            <Parameter Name="EstadoID" Mode="In" Type="Int32" />
+            <Parameter Name="Codigo" Mode="In" Type="String" />
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="PaisID" Mode="In" Type="Int32" />
+            <Parameter Name="UsuarioID" Mode="In" Type="Int32" />
+            <Parameter Name="Activo" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="spEditarMunicipios">
+            <Parameter Name="MunicipioID" Mode="In" Type="Int32" />
+            <Parameter Name="Codigo" Mode="In" Type="String" />
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="EstadoID" Mode="In" Type="Int32" />
+            <Parameter Name="Activo" Mode="In" Type="Boolean" />
+            <Parameter Name="UsuarioID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spObtenerUsuarioFunciones" ReturnType="Collection(IntranetModel.spObtenerUsuarioFunciones_Result)">
+            <Parameter Name="UsuarioID" Mode="In" Type="Int32" />
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="RolID" Mode="In" Type="Int32" />
+            <Parameter Name="RolActivo" Mode="In" Type="Boolean" />
+            <Parameter Name="Activo" Mode="In" Type="Boolean" />
+            <Parameter Name="FuncionActivo" Mode="In" Type="Boolean" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="spCountingEntities_Result">
+          <Property Type="Int32" Name="NoPaises" Nullable="true" />
+          <Property Type="Int32" Name="NoEstados" Nullable="true" />
+          <Property Type="Int32" Name="NoMunicipios" Nullable="true" />
+          <Property Type="Int32" Name="NoCiudades" Nullable="true" />
+          <Property Type="Int32" Name="NoCP" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="spObtenerFunciones_Result">
+          <Property Type="Int32" Name="FuncionID" Nullable="false" />
+          <Property Type="Int32" Name="FuncionPadreID" Nullable="true" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Descripcion" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Url" Nullable="true" MaxLength="2000" />
+          <Property Type="Int32" Name="TipoFuncionID" Nullable="false" />
+          <Property Type="Boolean" Name="Activo" Nullable="false" />
+          <Property Type="String" Name="TipoFuncion" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="spObtenerRoles_Result">
+          <Property Type="Int32" Name="RolID" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="Activo" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="spObtenerRolFunciones_Result">
+          <Property Type="Int32" Name="RolID" Nullable="false" />
+          <Property Type="String" Name="Rol" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="RolActivo" Nullable="false" />
+          <Property Type="Int32" Name="FuncionID" Nullable="false" />
+          <Property Type="Int32" Name="FuncionPadreID" Nullable="true" />
+          <Property Type="String" Name="FuncionPadre" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Funcion" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="FuncionDescripcion" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Url" Nullable="true" MaxLength="2000" />
+          <Property Type="Int32" Name="TipoFuncionID" Nullable="false" />
+          <Property Type="Boolean" Name="FuncionActivo" Nullable="false" />
+          <Property Type="String" Name="TipoFuncion" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Metadata" Nullable="true" MaxLength="1000" />
+        </ComplexType>
+        <ComplexType Name="spObtenerUsuario_Result">
+          <Property Type="Int32" Name="UsuarioID" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="RolID" Nullable="false" />
+          <Property Type="String" Name="Rol" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="spObtenerCiudades_Result">
+          <Property Type="Int32" Name="CiudadID" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="EstadoID" Nullable="true" />
+          <Property Type="Int32" Name="MunicipioID" Nullable="true" />
+          <Property Type="DateTime" Name="FechaUltimaModificacion" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="UsuarioID" Nullable="true" />
+          <Property Type="Boolean" Name="Activo" Nullable="true" />
+          <Property Type="String" Name="Municipio" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="Estado" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="Pais" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="PaisID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="spObtenerCodigosPostales_Result">
+          <Property Type="Int32" Name="CodigoPostalID" Nullable="false" />
+          <Property Type="String" Name="CodigoPostal" Nullable="true" MaxLength="255" />
+          <Property Type="Int32" Name="MunicipioID" Nullable="true" />
+          <Property Type="Int32" Name="CiudadID" Nullable="true" />
+          <Property Type="String" Name="Asentamiento" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="TipoAsentamiento" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="Zona" Nullable="true" MaxLength="255" />
+          <Property Type="DateTime" Name="FechaUltimaModificacion" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="UsuarioID" Nullable="true" />
+          <Property Type="Boolean" Name="Activo" Nullable="true" />
+          <Property Type="String" Name="Municipio" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="Ciudad" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="Estado" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="Pais" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="PaisID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="spObtenerEstados_Result">
+          <Property Type="Int32" Name="EstadoID" Nullable="false" />
+          <Property Type="String" Name="Codigo" Nullable="true" MaxLength="5" />
+          <Property Type="String" Name="Nombre" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="PaisID" Nullable="false" />
+          <Property Type="DateTime" Name="FechaUltimaModificacion" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="UsuarioID" Nullable="true" />
+          <Property Type="Boolean" Name="Activo" Nullable="true" />
+          <Property Type="String" Name="Pais" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="spObtenerMunicipios_Result">
+          <Property Type="Int32" Name="MunicipioID" Nullable="false" />
+          <Property Type="String" Name="Codigo" Nullable="true" MaxLength="4" />
+          <Property Type="String" Name="Nombre" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="EstadoID" Nullable="true" />
+          <Property Type="DateTime" Name="FechaUltimaModificacion" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="UsuarioID" Nullable="true" />
+          <Property Type="Boolean" Name="Activo" Nullable="true" />
+          <Property Type="String" Name="Estado" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="Pais" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="PaisID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="spObtenerPaises_Result">
+          <Property Type="Int32" Name="PaisID" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Codigo" Nullable="false" MaxLength="2" />
+          <Property Type="String" Name="Moneda" Nullable="false" MaxLength="5" />
+          <Property Type="String" Name="CodMoneda" Nullable="false" MaxLength="3" />
+          <Property Type="DateTime" Name="FechaUltimaModificacion" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="UsuarioID" Nullable="true" />
+          <Property Type="Boolean" Name="Activo" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="spObtenerUsuarioFunciones_Result">
+          <Property Type="Int32" Name="UsuarioID" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="Recordarme" Nullable="true" />
+          <Property Type="String" Name="Foto" Nullable="true" MaxLength="4000" />
+          <Property Type="String" Name="NombreCompleto" Nullable="true" MaxLength="1000" />
+          <Property Type="Int32" Name="RolID" Nullable="true" />
+          <Property Type="String" Name="Rol" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="FuncionID" Nullable="true" />
+          <Property Type="String" Name="Funcion" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="FuncionPadreID" Nullable="true" />
+          <Property Type="String" Name="FuncionPadre" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="FuncionDescripcion" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Url" Nullable="true" MaxLength="2000" />
+          <Property Type="String" Name="Metadata" Nullable="true" MaxLength="1000" />
+          <Property Type="Boolean" Name="UsuarioActivo" Nullable="false" />
+          <Property Type="Boolean" Name="RolActivo" Nullable="true" />
+          <Property Type="Boolean" Name="FuncionActivo" Nullable="true" />
+          <Property Type="Int32" Name="TipoFuncionID" Nullable="true" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="IntranetModelStoreContainer" CdmEntityContainer="IntranetEntities">
+          <EntitySetMapping Name="Funcion">
+            <EntityTypeMapping TypeName="IntranetModel.Funcion">
+              <MappingFragment StoreEntitySet="Funcion">
+                <ScalarProperty Name="FuncionID" ColumnName="FuncionID" />
+                <ScalarProperty Name="FuncionPadreID" ColumnName="FuncionPadreID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="TipoFuncionID" ColumnName="TipoFuncionID" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="Metadata" ColumnName="Metadata" />
+                <ScalarProperty Name="Orden" ColumnName="Orden" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rol">
+            <EntityTypeMapping TypeName="IntranetModel.Rol">
+              <MappingFragment StoreEntitySet="Rol">
+                <ScalarProperty Name="RolID" ColumnName="RolID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RolFuncion">
+            <EntityTypeMapping TypeName="IntranetModel.RolFuncion">
+              <MappingFragment StoreEntitySet="RolFuncion">
+                <ScalarProperty Name="RolFuncionID" ColumnName="RolFuncionID" />
+                <ScalarProperty Name="RolID" ColumnName="RolID" />
+                <ScalarProperty Name="FuncionID" ColumnName="FuncionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoFuncion">
+            <EntityTypeMapping TypeName="IntranetModel.TipoFuncion">
+              <MappingFragment StoreEntitySet="TipoFuncion">
+                <ScalarProperty Name="TipoFuncionID" ColumnName="TipoFuncionID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuario">
+            <EntityTypeMapping TypeName="IntranetModel.Usuario">
+              <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+                <ScalarProperty Name="Pass" ColumnName="Pass" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="Recordarme" ColumnName="Recordarme" />
+                <ScalarProperty Name="Foto" ColumnName="Foto" />
+                <ScalarProperty Name="NombreCompleto" ColumnName="NombreCompleto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UsuarioRol">
+            <EntityTypeMapping TypeName="IntranetModel.UsuarioRol">
+              <MappingFragment StoreEntitySet="UsuarioRol">
+                <ScalarProperty Name="UsuarioRolID" ColumnName="UsuarioRolID" />
+                <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+                <ScalarProperty Name="RolID" ColumnName="RolID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ciudad">
+            <EntityTypeMapping TypeName="IntranetModel.Ciudad">
+              <MappingFragment StoreEntitySet="Ciudad">
+                <ScalarProperty Name="CiudadID" ColumnName="CiudadID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="EstadoID" ColumnName="EstadoID" />
+                <ScalarProperty Name="MunicipioID" ColumnName="MunicipioID" />
+                <ScalarProperty Name="FechaUltimaModificacion" ColumnName="FechaUltimaModificacion" />
+                <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CodigoPostal">
+            <EntityTypeMapping TypeName="IntranetModel.CodigoPostal">
+              <MappingFragment StoreEntitySet="CodigoPostal">
+                <ScalarProperty Name="CodigoPostalID" ColumnName="CodigoPostalID" />
+                <ScalarProperty Name="CodigoPostal1" ColumnName="CodigoPostal" />
+                <ScalarProperty Name="MunicipioID" ColumnName="MunicipioID" />
+                <ScalarProperty Name="CiudadID" ColumnName="CiudadID" />
+                <ScalarProperty Name="Asentamiento" ColumnName="Asentamiento" />
+                <ScalarProperty Name="TipoAsentamiento" ColumnName="TipoAsentamiento" />
+                <ScalarProperty Name="Zona" ColumnName="Zona" />
+                <ScalarProperty Name="FechaUltimaModificacion" ColumnName="FechaUltimaModificacion" />
+                <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Estado">
+            <EntityTypeMapping TypeName="IntranetModel.Estado">
+              <MappingFragment StoreEntitySet="Estado">
+                <ScalarProperty Name="EstadoID" ColumnName="EstadoID" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="PaisID" ColumnName="PaisID" />
+                <ScalarProperty Name="FechaUltimaModificacion" ColumnName="FechaUltimaModificacion" />
+                <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Municipio">
+            <EntityTypeMapping TypeName="IntranetModel.Municipio">
+              <MappingFragment StoreEntitySet="Municipio">
+                <ScalarProperty Name="MunicipioID" ColumnName="MunicipioID" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="EstadoID" ColumnName="EstadoID" />
+                <ScalarProperty Name="FechaUltimaModificacion" ColumnName="FechaUltimaModificacion" />
+                <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pais">
+            <EntityTypeMapping TypeName="IntranetModel.Pais">
+              <MappingFragment StoreEntitySet="Pais">
+                <ScalarProperty Name="PaisID" ColumnName="PaisID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Moneda" ColumnName="Moneda" />
+                <ScalarProperty Name="CodMoneda" ColumnName="CodMoneda" />
+                <ScalarProperty Name="FechaUltimaModificacion" ColumnName="FechaUltimaModificacion" />
+                <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tmpUsuarios">
+            <EntityTypeMapping TypeName="IntranetModel.tmpUsuarios">
+              <MappingFragment StoreEntitySet="tmpUsuarios">
+                <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="RolID" ColumnName="RolID" />
+                <ScalarProperty Name="Rol" ColumnName="Rol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="spCountingEntities" FunctionName="IntranetModel.Store.spCountingEntities">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="IntranetModel.spCountingEntities_Result">
+                <ScalarProperty Name="NoPaises" ColumnName="NoPaises" />
+                <ScalarProperty Name="NoEstados" ColumnName="NoEstados" />
+                <ScalarProperty Name="NoMunicipios" ColumnName="NoMunicipios" />
+                <ScalarProperty Name="NoCiudades" ColumnName="NoCiudades" />
+                <ScalarProperty Name="NoCP" ColumnName="NoCP" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spObtenerFunciones" FunctionName="IntranetModel.Store.spObtenerFunciones">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="IntranetModel.spObtenerFunciones_Result">
+                <ScalarProperty Name="FuncionID" ColumnName="FuncionID" />
+                <ScalarProperty Name="FuncionPadreID" ColumnName="FuncionPadreID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="TipoFuncionID" ColumnName="TipoFuncionID" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="TipoFuncion" ColumnName="TipoFuncion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spObtenerRoles" FunctionName="IntranetModel.Store.spObtenerRoles">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="IntranetModel.spObtenerRoles_Result">
+                <ScalarProperty Name="RolID" ColumnName="RolID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spObtenerRolFunciones" FunctionName="IntranetModel.Store.spObtenerRolFunciones">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="IntranetModel.spObtenerRolFunciones_Result">
+                <ScalarProperty Name="RolID" ColumnName="RolID" />
+                <ScalarProperty Name="Rol" ColumnName="Rol" />
+                <ScalarProperty Name="RolActivo" ColumnName="RolActivo" />
+                <ScalarProperty Name="FuncionID" ColumnName="FuncionID" />
+                <ScalarProperty Name="FuncionPadreID" ColumnName="FuncionPadreID" />
+                <ScalarProperty Name="FuncionPadre" ColumnName="FuncionPadre" />
+                <ScalarProperty Name="Funcion" ColumnName="Funcion" />
+                <ScalarProperty Name="FuncionDescripcion" ColumnName="FuncionDescripcion" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="TipoFuncionID" ColumnName="TipoFuncionID" />
+                <ScalarProperty Name="FuncionActivo" ColumnName="FuncionActivo" />
+                <ScalarProperty Name="TipoFuncion" ColumnName="TipoFuncion" />
+                <ScalarProperty Name="Metadata" ColumnName="Metadata" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spObtenerUsuario" FunctionName="IntranetModel.Store.spObtenerUsuario">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="IntranetModel.spObtenerUsuario_Result">
+                <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="RolID" ColumnName="RolID" />
+                <ScalarProperty Name="Rol" ColumnName="Rol" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spObtenerCiudades" FunctionName="IntranetModel.Store.spObtenerCiudades">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="IntranetModel.spObtenerCiudades_Result">
+                <ScalarProperty Name="CiudadID" ColumnName="CiudadID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="EstadoID" ColumnName="EstadoID" />
+                <ScalarProperty Name="MunicipioID" ColumnName="MunicipioID" />
+                <ScalarProperty Name="FechaUltimaModificacion" ColumnName="FechaUltimaModificacion" />
+                <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="Municipio" ColumnName="Municipio" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Pais" ColumnName="Pais" />
+                <ScalarProperty Name="PaisID" ColumnName="PaisID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spObtenerCodigosPostales" FunctionName="IntranetModel.Store.spObtenerCodigosPostales">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="IntranetModel.spObtenerCodigosPostales_Result">
+                <ScalarProperty Name="CodigoPostalID" ColumnName="CodigoPostalID" />
+                <ScalarProperty Name="CodigoPostal" ColumnName="CodigoPostal" />
+                <ScalarProperty Name="MunicipioID" ColumnName="MunicipioID" />
+                <ScalarProperty Name="CiudadID" ColumnName="CiudadID" />
+                <ScalarProperty Name="Asentamiento" ColumnName="Asentamiento" />
+                <ScalarProperty Name="TipoAsentamiento" ColumnName="TipoAsentamiento" />
+                <ScalarProperty Name="Zona" ColumnName="Zona" />
+                <ScalarProperty Name="FechaUltimaModificacion" ColumnName="FechaUltimaModificacion" />
+                <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="Municipio" ColumnName="Municipio" />
+                <ScalarProperty Name="Ciudad" ColumnName="Ciudad" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Pais" ColumnName="Pais" />
+                <ScalarProperty Name="PaisID" ColumnName="PaisID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spObtenerEstados" FunctionName="IntranetModel.Store.spObtenerEstados">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="IntranetModel.spObtenerEstados_Result">
+                <ScalarProperty Name="EstadoID" ColumnName="EstadoID" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="PaisID" ColumnName="PaisID" />
+                <ScalarProperty Name="FechaUltimaModificacion" ColumnName="FechaUltimaModificacion" />
+                <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="Pais" ColumnName="Pais" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spObtenerMunicipios" FunctionName="IntranetModel.Store.spObtenerMunicipios">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="IntranetModel.spObtenerMunicipios_Result">
+                <ScalarProperty Name="MunicipioID" ColumnName="MunicipioID" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="EstadoID" ColumnName="EstadoID" />
+                <ScalarProperty Name="FechaUltimaModificacion" ColumnName="FechaUltimaModificacion" />
+                <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Pais" ColumnName="Pais" />
+                <ScalarProperty Name="PaisID" ColumnName="PaisID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spObtenerPaises" FunctionName="IntranetModel.Store.spObtenerPaises">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="IntranetModel.spObtenerPaises_Result">
+                <ScalarProperty Name="PaisID" ColumnName="PaisID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Moneda" ColumnName="Moneda" />
+                <ScalarProperty Name="CodMoneda" ColumnName="CodMoneda" />
+                <ScalarProperty Name="FechaUltimaModificacion" ColumnName="FechaUltimaModificacion" />
+                <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spEditarPais" FunctionName="IntranetModel.Store.spEditarPais" />
+          <FunctionImportMapping FunctionImportName="spAgregarCiudades" FunctionName="IntranetModel.Store.spAgregarCiudades" />
+          <FunctionImportMapping FunctionImportName="spAgregarCodigosPostales" FunctionName="IntranetModel.Store.spAgregarCodigosPostales" />
+          <FunctionImportMapping FunctionImportName="spAgregarEstados" FunctionName="IntranetModel.Store.spAgregarEstados" />
+          <FunctionImportMapping FunctionImportName="spAgregarMunicipios" FunctionName="IntranetModel.Store.spAgregarMunicipios" />
+          <FunctionImportMapping FunctionImportName="spAgregarPais" FunctionName="IntranetModel.Store.spAgregarPais" />
+          <FunctionImportMapping FunctionImportName="spEditarCiudades" FunctionName="IntranetModel.Store.spEditarCiudades" />
+          <FunctionImportMapping FunctionImportName="spEditarCodigosPostales" FunctionName="IntranetModel.Store.spEditarCodigosPostales" />
+          <FunctionImportMapping FunctionImportName="spEditarEstados" FunctionName="IntranetModel.Store.spEditarEstados" />
+          <FunctionImportMapping FunctionImportName="spEditarMunicipios" FunctionName="IntranetModel.Store.spEditarMunicipios" />
+          <FunctionImportMapping FunctionImportName="spObtenerUsuarioFunciones" FunctionName="IntranetModel.Store.spObtenerUsuarioFunciones">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="IntranetModel.spObtenerUsuarioFunciones_Result">
+                <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Recordarme" ColumnName="Recordarme" />
+                <ScalarProperty Name="Foto" ColumnName="Foto" />
+                <ScalarProperty Name="NombreCompleto" ColumnName="NombreCompleto" />
+                <ScalarProperty Name="RolID" ColumnName="RolID" />
+                <ScalarProperty Name="Rol" ColumnName="Rol" />
+                <ScalarProperty Name="FuncionID" ColumnName="FuncionID" />
+                <ScalarProperty Name="Funcion" ColumnName="Funcion" />
+                <ScalarProperty Name="FuncionPadreID" ColumnName="FuncionPadreID" />
+                <ScalarProperty Name="FuncionPadre" ColumnName="FuncionPadre" />
+                <ScalarProperty Name="FuncionDescripcion" ColumnName="FuncionDescripcion" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="Metadata" ColumnName="Metadata" />
+                <ScalarProperty Name="UsuarioActivo" ColumnName="UsuarioActivo" />
+                <ScalarProperty Name="RolActivo" ColumnName="RolActivo" />
+                <ScalarProperty Name="FuncionActivo" ColumnName="FuncionActivo" />
+                <ScalarProperty Name="TipoFuncionID" ColumnName="TipoFuncionID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

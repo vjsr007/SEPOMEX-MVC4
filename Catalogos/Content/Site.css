@@ -1,0 +1,157 @@
+﻿/************************************************
+                    JQUERY UI
+*************************************************/
+
+.ui-dialog .ui-dialog-titlebar {
+    /* padding: .4em 1em; */
+    position: relative;
+    padding: 5px 15px;
+    border: 0 0 0 1px solid;
+    border-color: white;
+    padding: 5px 15px;
+    font-size: 14px;
+    text-decoration: none;
+    -webkit-border-bottom-right-radius: 0;
+    -moz-border-radius-bottomright: 0;
+    border-bottom-right-radius: 0;
+    -webkit-border-bottom-left-radius: 0;
+    -moz-border-radius-bottomleft: 0;
+    border-bottom-left-radius: 0;
+    border-bottom: 1px solid #ccc;
+}
+
+.ui-dialog .ui-dialog-title {
+    float: left;
+    color: #404040;
+    font-weight: bold;
+    margin-top: 0; 
+    margin-bottom: 0; 
+    padding: 3px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.ui-dialog .ui-dialog-titlebar-close span
+{
+    display: block;
+    margin: 5px;
+    text-indent: 9999px;
+}
+input[type="text"], input[type="email"], input[type="tel"], input[type="search"], input[type="url"], input[type="password"], .ui-autocomplete-input, textarea, .uneditable-input {
+    display: inline-block;
+    padding: 2px;
+    font-size: 12px;
+    line-height: 12px;
+    color: #555555;
+    border: 1px solid #ccc;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+
+
+.ui-button, .ui-dialog-buttonpane .ui-dialog-buttonset .ui-button {
+    text-shadow: none;
+    background-image: -webkit-gradient(linear, left 0%, left 100%, from(#ffffff), to(#e6e6e6));
+    background-image: -webkit-linear-gradient(top, #ffffff, 0%, #e6e6e6, 100%);
+    background-image: -moz-linear-gradient(top, #ffffff 0%, #e6e6e6 100%);
+    background-image: linear-gradient(to bottom, #ffffff 0%, #e6e6e6 100%);
+    background-repeat: repeat-x;
+    border-color: #e0e0e0;
+    border-color: #ccc;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffe6e6e6', GradientType=0);
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+}
+
+.ui-dialog-buttonpane .ui-dialog-buttonset .ui-button {
+    color: black;
+}
+.ui-button-primary, .ui-dialog-buttonset .ui-button:not(:first-child) {
+    color: black;
+}
+.ui-dialog-buttonpane .ui-dialog-buttonset .ui-button.ui-state-hover {
+    color: black;
+    background-color: #3276b1;
+}
+.ui-dialog-buttonpane .ui-dialog-buttonset .ui-button.ui-state-hover:not(:first-child) {
+    color: black;
+    background-color: #3276b1;
+}
+.ui-selected .panel-primary { border: 1px dotted #FECA40; font-size:1em; }
+.ui-selected i { color: lightblue; }
+/************************************************
+                    BOOTSTRAP
+*************************************************/
+.navbar-brand {
+    float: left;
+    padding: 15px 15px;
+    font-size: 18px;
+    line-height: 20px;
+    margin-top: -10px;
+}
+.navbar-nav
+{
+    height: auto;
+}
+.navbar-top-links
+{
+    height: 50px;
+}
+.btn
+{
+    width: 100%;
+    margin-bottom: 3px;
+}
+.form-control
+{
+    width: 100%;
+}
+
+body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    line-height: 1.42857143;
+    color: #333;
+    background-color: #fff;
+}
+
+.field-validation-error span
+{
+	color: red;
+	font-size: .8em;
+	text-decoration: wavy;
+	font-style: italic;
+}
+
+.btn {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 12px;
+    font-weight: normal;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.btn-group, .btn-group-vertical {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    margin-top: -5px;
+}
+
+.selectable > div
+{
+	cursor: pointer;
+}

@@ -1,0 +1,42 @@
+﻿<!doctype html>
+<html lang="en">
+    <head>
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>Curso ASP.NET MVC - @ViewBag.Title</title>
+        @Styles.Render("~/Content/theme")
+    
+        <!-- Font Awesome -->
+        @Styles.Render("~/Content/custom")
+        <!-- Custom CSS -->
+        @Styles.Render("~/Content/font-awesome")
+
+        <link rel="stylesheet" href="@Url.Content("~/Content/login.css")" />
+
+        <script>
+            var webroot = "@Url.Content("~/")";
+            var _names = @Html.Raw(Catalogos.Utils.Exportar.GetTranslations())
+            
+        </script>
+
+        <!-- jQuery -->
+        @Scripts.Render("~/bundles/jquery")
+        <!-- jQuery UI -->
+        @Scripts.Render("~/bundles/jqueryui")
+        <!-- BlockUI -->
+        @Scripts.Render("~/bundles/blockui")
+        <!-- Angular -->
+        @Scripts.Render("~/bundles/angular")
+        <!-- Utilerias -->
+        @Scripts.Render("~/bundles/utilerias")
+    </head>
+    <body>
+        @RenderBody()
+        @RenderSection("scripts", required: false)
+    </body>
+</html>

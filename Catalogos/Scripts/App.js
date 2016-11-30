@@ -6,6 +6,8 @@
 
     self.dontBlock = false;
 
+    var NoAutencticadoReditect = webroot + "Login/Index";
+
     var init = function () {
         ///<summary>Ejecución al realizar $.ready()</summary>
         $("#cmbIdioma").change(function (e) {
@@ -57,6 +59,20 @@
             });
 
             $.unblockUI();
+        }).ajaxSuccess(function (e, xhr, settings, data) {
+            try { var data = $.parseJSON(data) } catch (e) { };
+            if (data.NoAutenticado) {
+                Utils.mostrarMensaje("", "Se ha perdido la sesión se redirigirá al inicio de sesión", null, function () {
+                    window.location = NoAutencticadoReditect;
+                });
+
+                return false;
+            }
+            if (data.NoAutorizado) {
+                Utils.mostrarMensaje("", "No tiene acceso a la siguiente función: " + settings.url);
+
+                return false;
+            }
         }).ajaxError(function (e, jqxhr, settings, thrownError) {
             $.unblockUI();
 

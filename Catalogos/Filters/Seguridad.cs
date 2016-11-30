@@ -5,6 +5,7 @@ using System.Web.Routing;
 using System.Linq;
 using System.Configuration;
 using Catalogos.Models.Seguridad;
+using Catalogos.Models;
 
 namespace Catalogos.Filters
 {
@@ -43,24 +44,48 @@ namespace Catalogos.Filters
         {
             if (filterContext.HttpContext.Session["UsuarioWeb"] != null)
             {
-                filterContext.Result = new RedirectToRouteResult(
-                    new RouteValueDictionary(
-                        new
-                        {
-                            controller = "Login",
-                            action = "NoAutorizado"
-                        })
-                    );
+                if (filterContext.HttpContext.Request.IsAjaxRequest())
+                {
+                    filterContext.Result = new JsonResult
+                    {
+                        Data = new { NoAutorizado = true },
+                        JsonRequestBehavior = JsonRequestBehavior.AllowGet
+                    };
+                }
+                else
+                {
+                    filterContext.Result = new RedirectToRouteResult(
+                        new RouteValueDictionary(
+                            new
+                            {
+                                controller = "Login",
+                                action = "NoAutorizado"
+                            })
+                        );
+                }
+
+
             }
             else {
-                filterContext.Result = new RedirectToRouteResult(
-                    new RouteValueDictionary(
-                        new
-                        {
-                            controller = "Login",
-                            action = "Index"
-                        })
-                    );
+                if (filterContext.HttpContext.Request.IsAjaxRequest())
+                {
+                    filterContext.Result = new JsonResult
+                    {
+                        Data = new { NoAutenticado = true },
+                        JsonRequestBehavior = JsonRequestBehavior.AllowGet
+                    };
+                }
+                else
+                {
+                    filterContext.Result = new RedirectToRouteResult(
+                        new RouteValueDictionary(
+                            new
+                            {
+                                controller = "Login",
+                                action = "Index"
+                            })
+                        );
+                }
             }
         }
 

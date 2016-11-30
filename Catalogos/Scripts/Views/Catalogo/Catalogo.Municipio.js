@@ -1,5 +1,6 @@
-﻿Catalogo = {};
+﻿var Catalogo = {} || Catalogo;
 (function (self) {
+    "use strict";
 
     var formID = "#frmMunicipios"
     var $form = function (selector) { return $(formID).find(selector); }
@@ -26,7 +27,10 @@
         get del_tblDatos() { return $form("#del_tblDatos") },
 
         get grid() { return $form("#tblDatos") },
-        get pager() { return $form(pager) }
+        get pager() { return $form(pager) },
+
+        get modalCmbEstado() { return $form("#EstadoID") },
+        get modalCmbPais() { return $form("#PaisID") },
     };
     var urls = {
         get ObtenerPaisesJson() { return webroot + 'Catalogo/ObtenerPaises' },
@@ -56,7 +60,7 @@
             }
 
             AppData.obtenerMunicipios(postDataMunicipio, function (data) {
-                Result = data;
+                var Result = data;
 
                 if (Result.Error) {
                     Utils.mostrarMensaje("Error al obtener periodos", Result.Mensaje);
@@ -203,12 +207,12 @@
                                             $.each(data, function (idx, d) {
                                                 sHtml += '<option value="' + d.EstadoID + '">' + d.Nombre + '</option>';
                                             });
-                                            ctrls.cmbEstado.html(sHtml);
+                                            ctrls.modalCmbEstado.html(sHtml);
                                         }
                                         );
                                     }
                                     else {
-                                        ctrls.cmbEstado.html(sHtml);
+                                        ctrls.modalCmbEstado.html(sHtml);
                                     }
                                 }
                             }]

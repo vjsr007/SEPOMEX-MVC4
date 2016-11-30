@@ -29,7 +29,7 @@ namespace Catalogos.Controllers
         }
 
         [ErrorHandlerJson]
-        public JsonResult ObtenerRolFunciones(ViewModelRolFuncion rf)
+        public JsonResult ObtenerRolFunciones(RolFuncionViewModel rf)
         {
             using (var client = new IntranetEntities())
             {

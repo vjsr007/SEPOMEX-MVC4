@@ -172,8 +172,11 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\Translation.cs" />
+    <Compile Include="Models\Catalogos\CiudadViewModel.cs" />
+    <Compile Include="Models\Catalogos\CodigoPostalViewModel.cs" />
     <Compile Include="Models\Catalogos\EstadoViewModel.cs" />
     <Compile Include="Models\Catalogos\PaisViewModel.cs" />
+    <Compile Include="Models\Catalogos\MunicipioViewModel.cs" />
     <Compile Include="Models\ErrorModel.cs" />
     <Compile Include="Models\Grid.cs" />
     <Compile Include="Models\Intranet\Ciudad.cs">
@@ -264,7 +267,7 @@
     <Compile Include="Models\Respuesta.cs" />
     <Compile Include="Models\Seguridad\UsuarioFuncion.cs" />
     <Compile Include="Models\Seguridad\UsuarioWeb.cs" />
-    <Compile Include="Models\Seguridad\ViewModelRolFuncion.cs" />
+    <Compile Include="Models\Seguridad\RolFuncionViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\Names.en-GB.Designer.cs">
       <DependentUpon>Names.en-GB.resx</DependentUpon>

@@ -5,7 +5,7 @@ using System.Web;
 
 namespace Catalogos.Models.Seguridad
 {
-    public class ViewModelRolFuncion
+    public class RolFuncionViewModel
     {
         public int? RolFuncionID { get; set; }
         public int? RolID { get; set; }

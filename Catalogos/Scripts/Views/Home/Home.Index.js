@@ -1,5 +1,6 @@
-﻿var Home = {};
+﻿var Home = {} || Home;
 (function (self) {
+    "use strict";
 
     var formID = "#frmMenu"
     var $form = function (selector) { return $(formID).find(selector); }

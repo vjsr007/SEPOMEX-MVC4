@@ -142,7 +142,7 @@ namespace Catalogos.Controllers
 
         #region Estado
 
-        public JsonResult ObtenerEstados(Estado f)
+        public JsonResult ObtenerEstados(EstadoViewModel f)
         {
             using (var client = new IntranetEntities())
             {
@@ -186,17 +186,17 @@ namespace Catalogos.Controllers
 
         #region Municipio
 
-        public JsonResult ObtenerMunicipios(Municipio f)
+        public JsonResult ObtenerMunicipios(MunicipioViewModel f)
         {
             using (var client = new IntranetEntities())
             {
-                var res = client.spObtenerMunicipios(f.MunicipioID,f.Codigo,f.Nombre,f.EstadoID, f.Activo, null).ToList();
+                var res = client.spObtenerMunicipios(f.MunicipioID,f.Codigo,f.Nombre,f.EstadoID, f.Activo, f.PaisID).ToList();
 
                 return Json(res, JsonRequestBehavior.AllowGet);
             }
         }
 
-        public JsonResult EditarMunicipio(Municipio f)
+        public JsonResult EditarMunicipio(MunicipioViewModel f)
         {
             using (var client = new IntranetEntities())
             {
@@ -206,7 +206,7 @@ namespace Catalogos.Controllers
             }
         }
 
-        public JsonResult AgregarMunicipio(Municipio f)
+        public JsonResult AgregarMunicipio(MunicipioViewModel f)
         {
             f.UsuarioID = ((UsuarioWeb)Session["UsuarioWeb"]).Usuario.UsuarioID;
 
@@ -223,17 +223,17 @@ namespace Catalogos.Controllers
 
         #region Ciudad
 
-        public JsonResult ObtenerCiudades(Ciudad f)
+        public JsonResult ObtenerCiudades(CiudadViewModel f)
         {
             using (var client = new IntranetEntities())
             {
-                var res = client.spObtenerCiudades(f.CiudadID, f.MunicipioID, f.Nombre, f.EstadoID, f.Activo, null).ToList();
+                var res = client.spObtenerCiudades(f.CiudadID, f.MunicipioID, f.Nombre, f.EstadoID, f.Activo, f.PaisID).ToList();
 
                 return Json(res, JsonRequestBehavior.AllowGet);
             }
         }
 
-        public JsonResult EditarCiudad(Ciudad f)
+        public JsonResult EditarCiudad(CiudadViewModel f)
         {
             using (var client = new IntranetEntities())
             {
@@ -243,7 +243,7 @@ namespace Catalogos.Controllers
             }
         }
 
-        public JsonResult AgregarCiudad(Ciudad f)
+        public JsonResult AgregarCiudad(CiudadViewModel f)
         {
             f.UsuarioID = ((UsuarioWeb)Session["UsuarioWeb"]).Usuario.UsuarioID;
 
@@ -260,17 +260,17 @@ namespace Catalogos.Controllers
 
         #region CodigoPostal
 
-        public JsonResult ObtenerCodigosPostales(CodigoPostal f)
+        public JsonResult ObtenerCodigosPostales(CodigoPostalViewModel f)
         {
             using (var client = new IntranetEntities())
             {
-                var res = client.spObtenerCodigosPostales(f.CodigoPostal1, f.TipoAsentamiento, f.Asentamiento, f.Zona, f.MunicipioID, f.CiudadID, null, f.Activo, null).ToList();
+                var res = client.spObtenerCodigosPostales(f.CodigoPostal1, f.TipoAsentamiento, f.Asentamiento, f.Zona, f.MunicipioID, f.CiudadID, f.EstadoID, f.Activo, f.PaisID).ToList();
 
                 return Json(res, JsonRequestBehavior.AllowGet);
             }
         }
 
-        public JsonResult EditarCodigoPostal(CodigoPostal f)
+        public JsonResult EditarCodigoPostal(CodigoPostalViewModel f)
         {
             using (var client = new IntranetEntities())
             {
@@ -280,7 +280,7 @@ namespace Catalogos.Controllers
             }
         }
 
-        public JsonResult AgregarCodigoPostal(CodigoPostal f)
+        public JsonResult AgregarCodigoPostal(CodigoPostalViewModel f)
         {
             f.UsuarioID = ((UsuarioWeb)Session["UsuarioWeb"]).Usuario.UsuarioID;
 

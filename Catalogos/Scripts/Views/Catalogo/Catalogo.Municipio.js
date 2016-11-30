@@ -1,96 +1,146 @@
 ﻿Catalogo = {};
 (function (self) {
 
+    var formID = "#frmMunicipios"
+    var $form = function (selector) { return $(formID).find(selector); }
+    var pager = '#pgDatos';
+    var ctrls = {
+        get frmMunicipios() { return $(formID) },
+
+        get txtNombre() { return $form('#txtNombre') },
+        get txCodigo() { return $form("#txCodigo") },
+        get chkActivo() { return $form("#chkActivo") },
+        get cmbEstado() { return $form("#cmbEstado") },
+        get cmbPais() { return $form("#cmbPais") },
+
+        get btnAgregar() { return $form("#btnAgregar") },
+        get btnEditar() { return $form("#btnEditar") },
+        get btnBuscar() { return $form("#btnBuscar") },
+
+        get opAgregar() { return $form("#opAgregar") },
+        get opEditar() { return $form("#opEditar") },
+        get opEliminar() { return $form("#opEliminar") },
+
+        get add_tblDatos() { return $form("#add_tblDatos") },
+        get edit_tblDatos() { return $form("#edit_tblDatos") },
+        get del_tblDatos() { return $form("#del_tblDatos") },
+
+        get grid() { return $form("#tblDatos") },
+        get pager() { return $form(pager) }
+    };
+    var urls = {
+        get ObtenerPaisesJson() { return webroot + 'Catalogo/ObtenerPaises' },
+        get ObtenerEstadosJson() { return webroot + 'Catalogo/ObtenerEstados' },
+        get EditarMunicipio() { return webroot + 'Catalogo/EditarMunicipio' },
+        get AgregarMunicipio() { return webroot + 'Catalogo/AgregarMunicipio' },        
+    }
     var Municipios = {};
     var postDataMunicipio = {};
-    var grid;
+    var optionSeleccione = '<option value="">[Seleccione]</option>';
 
     var BuscarMunicipios = function () {
 
-        grid.jqGrid("clearGridData", true);
+        ctrls.grid.jqGrid("clearGridData", true);
 
         try {
 
             postDataMunicipio = {
-	            MunicipioID : 0,
-	            Nombre : $.trim($("#txtNombre").val())==''?' ':$.trim($("#txtNombre").val()),
-	            Codigo : $.trim($("#txCodigo").val())==''?' ':$.trim($("#txCodigo").val()),
-	            FechaUltimaModificacion: '1900/01/01',
-	            UsuarioID: 0,
-                Activo : $("#chkActivo").is(":checked"),
-                EstadoID : $("#cmbEstado").val(),
-                PaisID : $("#cmbPais").val()
+                MunicipioID: 0,
+                Nombre: $.trim(ctrls.txtNombre.val()) == '' ? ' ' : $.trim(ctrls.txtNombre.val()),
+                Codigo: $.trim(ctrls.txCodigo.val()) == '' ? ' ' : $.trim(ctrls.txCodigo.val()),
+                FechaUltimaModificacion: '1900/01/01',
+                UsuarioID: 0,
+                Activo: ctrls.chkActivo.is(":checked"),
+                EstadoID: ctrls.cmbEstado.val(),
+                PaisID: ctrls.cmbPais.val()
             }
 
-            obtenerMunicipios(postDataMunicipio, function(data){
+            AppData.obtenerMunicipios(postDataMunicipio, function (data) {
                 Result = data;
 
                 if (Result.Error) {
-                    mostrarMensaje("Error al obtener periodos", Result.Mensaje);
+                    Utils.mostrarMensaje("Error al obtener periodos", Result.Mensaje);
                 }
                 else {
-                    grid.setGridParam(
+                    ctrls.grid.setGridParam(
                     {
                         datatype: 'local',
                         data: data
                     });
-                    grid.trigger("reloadGrid", [{ page: 1}]);
-                } 
+                    ctrls.grid.trigger("reloadGrid", [{ page: 1 }]);
+                }
             });
         } catch (e) {
-            mostrarMensaje("Error de sintaxis", e.message);
+            Utils.Utils.mostrarMensaje("Error de sintaxis", e.message);
         }
     };
 
-    var init = function () {
-        $.ajaxSetup({ cache: false });
+    var cargarEstados = function () {
+        var sHtml = optionSeleccione;
+        if (ctrls.cmbPais.val() != "") {
 
-        obtenerPaises({
-            PaisID: null,
-            Nombre: null,
-            Codigo: null,
-            Moneda: null,
-            CodMoneda: null,
-            FechaUltimaModificacion: null,
-            UsuarioID: null,
-            Activo: null
-        }, function (data) {
-            var sHtml = '<option value="">[Seleccione]</option>';
-            $.each(data, function (idx, d) {
-                sHtml += '<option value="' + d.PaisID + '">' + d.Nombre + '</option>';
-            });
-            $('#cmbPais').html(sHtml);
-        }
-        );
-
-        $('#cmbEstado').html('<option value="">[Seleccione]</option>');
-        $('#cmbPais').change(function () {
-            var sHtml = '<option value="">[Seleccione]</option>';
-            if ($(this).val() != "") {
-                obtenerEstados({
+            AppData.obtenerEstados(
+                {
                     EstadoID: 0,
                     Nombre: ' ',
                     Codigo: ' ',
                     FechaUltimaModificacion: '',
                     UsuarioID: 0,
                     Activo: null,
-                    PaisID: $(this).val()
-                }, function (data) {
+                    PaisID: ctrls.cmbPais.val()
+                },
+                function (data)
+                {
                     $.each(data, function (idx, d) {
                         sHtml += '<option value="' + d.EstadoID + '">' + d.Nombre + '</option>';
                     });
-                    $('#cmbEstado').html(sHtml);
+                    ctrls.cmbEstado.html(sHtml);
                 }
-                );
-            }
-            else {
-                $('#cmbEstado').html(sHtml);
-            }
-        });
+            );
+        }
+        else {
+            ctrls.cmbEstado.html(sHtml);
+        }
+    }
 
-        grid = $("#tblDatos");
+    var eventos = function () {
+        ctrls.cmbEstado.html(optionSeleccione);
 
-        grid.jqGrid({
+        ctrls.cmbPais.change(cargarEstados);
+
+        ctrls.opAgregar.click(function () { ctrls.add_tblDatos.click() });
+        ctrls.opEditar.click(function () { ctrls.edit_tblDatos.click() });
+        ctrls.opEliminar.click(function () { ctrls.del_tblDatos.click() });
+
+        ctrls.btnAgregar.click(function () { ctrls.add_tblDatos.click() });
+        ctrls.btnEditar.click(function () { ctrls.edit_tblDatos.click() });
+        ctrls.btnBuscar.click(BuscarMunicipios);
+
+    }
+
+    var inicializarControles = function () {
+        AppData.obtenerPaises(
+            {
+                PaisID: null,
+                Nombre: null,
+                Codigo: null,
+                Moneda: null,
+                CodMoneda: null,
+                FechaUltimaModificacion: null,
+                UsuarioID: null,
+                Activo: null
+            }, function (data) {
+                var sHtml = optionSeleccione;
+                $.each(data, function (idx, d) {
+                    sHtml += '<option value="' + d.PaisID + '">' + d.Nombre + '</option>';
+                });
+                ctrls.cmbPais.html(sHtml);
+            }
+        );
+    }
+
+    var configurarGrid = function () {
+        ctrls.grid.jqGrid({
             datatype: 'local',
             data: Municipios,
             mtype: 'POST',
@@ -122,11 +172,11 @@
                     edittype: 'select',
                     editrules: { edithidden: true, required: true },
                     editoptions: {
-                        dataUrl: webroot + 'Catalogo/ObtenerPaisesJson',
+                        dataUrl: urls.ObtenerPaisesJson,
                         buildSelect: function (data) {
                             var response = $.parseJSON(data);
                             var s = '<select>';
-                            s += '<option value="">[Seleccione]</option>';
+                            s += optionSeleccione;
                             $.each(response, function (i, obj) {
                                 s += '<option value="' + obj.PaisID + '">' + obj.Nombre + '</option>';
                             });
@@ -139,9 +189,9 @@
                             {
                                 type: 'change',
                                 fn: function (e) {
-                                    var sHtml = '<option value="">[Seleccione]</option>';
+                                    var sHtml = optionSeleccione;
                                     if ($(e.target).val() != "") {
-                                        obtenerEstados({
+                                        AppData.obtenerEstados({
                                             EstadoID: 0,
                                             Nombre: ' ',
                                             Codigo: ' ',
@@ -153,12 +203,12 @@
                                             $.each(data, function (idx, d) {
                                                 sHtml += '<option value="' + d.EstadoID + '">' + d.Nombre + '</option>';
                                             });
-                                            $("#EstadoID").html(sHtml);
+                                            ctrls.cmbEstado.html(sHtml);
                                         }
                                         );
                                     }
                                     else {
-                                        $("#EstadoID").html(sHtml);
+                                        ctrls.cmbEstado.html(sHtml);
                                     }
                                 }
                             }]
@@ -182,14 +232,14 @@
                     edittype: 'select',
                     editrules: { edithidden: true, required: true },
                     editoptions: {
-                        dataUrl: webroot + 'Catalogo/ObtenerEstadosJson',
+                        dataUrl: urls.ObtenerEstadosJson,
                         buildSelect: function (data) {
                             var response = $.parseJSON(data);
-                            var selectedRow = grid.getGridParam("selrow");
-                            var rowData = grid.getRowData(selectedRow);
+                            var selectedRow = ctrls.grid.getGridParam("selrow");
+                            var rowData = ctrls.grid.getRowData(selectedRow);
 
                             var s = '<select>';
-                            s += '<option value="">[Seleccione]</option>';
+                            s += optionSeleccione;
                             $.each(response, function (i, obj) {
                                 if (obj.PaisID == rowData.PaisID) {
                                     s += '<option value="' + obj.EstadoID + '">' + obj.Nombre + '</option>';
@@ -241,7 +291,7 @@
                     editoptions: { value: "true:false" }
                 }
             ],
-            pager: $('#pgDatos'),
+            pager: ctrls.pager,
             rowNum: 10,
             loadui: 'disable',
             viewrecords: true,
@@ -258,80 +308,80 @@
             }
         });
 
-        grid.jqGrid('navGrid', '#pgDatos', { search: false, refresh: false, del: false },
+        BuscarMunicipios();
+
+        configurarPager();
+    }
+
+    var configurarPager = function () {
+        ctrls.grid.jqGrid('navGrid', pager, { search: false, refresh: false, del: false },
             {
-                url: window.webroot + "Catalogo/EditarMunicipio",
+                url: ctrls.EditarMunicipio,
                 recreateForm: true,
                 modal: true,
                 width: "350",
                 beforeInitData: function () {
-                    grid.jqGrid('setColProp', 'MunicipioID', { editable: true, editrules: { required: true }, editoptions: {} });
+                    ctrls.grid.jqGrid('setColProp', 'MunicipioID', { editable: true, editrules: { required: true }, editoptions: {} });
 
-                    var cm = grid.jqGrid('getColProp', 'MunicipioID');
+                    var cm = ctrls.grid.jqGrid('getColProp', 'MunicipioID');
                     cm.editoptions.disabled = true;
 
-                    var selectedRow = grid.getGridParam("selrow");
-                    var rowData = grid.getRowData(selectedRow);
-                    grid.setColProp('EstadoID', {
+                    var selectedRow = ctrls.grid.getGridParam("selrow");
+                    var rowData = ctrls.grid.getRowData(selectedRow);
+                    ctrls.grid.setColProp('EstadoID', {
                         editoptions: {
-                            dataUrl: window.webroot + 'Catalogo/ObtenerEstadosJson?PaisID=' + rowData.PaisID
+                            dataUrl: urls.ObtenerEstadosJson + '?PaisID=' + rowData.PaisID
                         }
                     });
                 },
                 afterSubmit: function (response, postdata) {
-                    mostrarMensaje("Edición de País", "Operación Exitosa");
+                    Utils.mostrarMensaje("Edición de País", "Operación Exitosa");
+
                     BuscarMunicipios();
 
                     return [response.status, response.statusText, null];
                 },
                 errorTextFormat: function (data) {
                     var Mensaje = $(data.responseText).find('i').html();
-                    mostrarMensaje("Error: " + data.statusText, Mensaje == null ? data.responseText : Mensaje);
+                    Utils.mostrarMensaje("Error: " + data.statusText, Mensaje == null ? data.responseText : Mensaje);
                 },
                 closeAfterEdit: true
             },
             {
-                url: window.webroot + "Catalogo/AgregarMunicipio",
+                url: urls.AgregarMunicipio,
                 recreateForm: true,
                 modal: true,
                 width: "500",
                 beforeInitData: function () {
-                    grid.jqGrid('setColProp', 'MunicipioID', { editable: false, editrules: { required: false }, editoptions: {} });
+                    ctrls.grid.jqGrid('setColProp', 'MunicipioID', { editable: false, editrules: { required: false }, editoptions: {} });
 
-                    var cm = grid.jqGrid('getColProp', 'MunicipioID');
+                    var cm = ctrls.grid.jqGrid('getColProp', 'MunicipioID');
                     cm.editoptions.disabled = true;
                 },
                 afterSubmit: function (response, postdata) {
-                    mostrarMensaje("Edición de País", "Operación Exitosa");
+                    Utils.mostrarMensaje("Edición de País", "Operación Exitosa");
+
                     BuscarMunicipios();
 
                     return [response.status, response.statusText, null];
                 },
                 errorTextFormat: function (data) {
                     var Mensaje = $(data.responseText).find('i').html();
-                    mostrarMensaje("Error: " + data.statusText, Mensaje == null ? data.responseText : Mensaje);
+                    Utils.mostrarMensaje("Error: " + data.statusText, Mensaje == null ? data.responseText : Mensaje);
                 },
                 closeAfterAdd: true
             }
         );
+    }
 
-        $("#btnBuscar").click(function () {
-            BuscarMunicipios();
-        });
+    var init = function () {
+        inicializarControles();
 
-        $("#opAgregar").click(function () {
-            $("#add_tblDatos").click();
-        });
+        eventos();
 
-        $("#opEditar").click(function () {
-            $("#edit_tblDatos").click();
-        });
+        configurarGrid();
 
-        $("#opEliminar").click(function () {
-            $("#del_tblDatos").click();
-        });
-
-        BuscarMunicipios();
+        $.ajaxSetup({ cache: false });
     }
 
     $(init);

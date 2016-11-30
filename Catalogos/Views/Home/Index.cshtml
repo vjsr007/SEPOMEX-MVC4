@@ -2,122 +2,124 @@
 @section scripts {
     <script src="~/Scripts/Views/Home/Home.Index.js"></script>
 }
-<div class="row">
-    <div class="col-lg-12">
-        <h3 class="page-header-primary">Menu Principal</h3>
-    </div>
-    <!-- /.col-lg-12 -->
-</div>
-<!-- /.row -->
-<div class="row">
-    <div class="col-lg-3 col-md-6">
-        <div class="panel panel-primary">
-            <div class="panel-heading">
-                <div class="row">
-                    <div class="col-xs-3">
-                        <i class="fa fa-flag fa-5x"></i>
-                    </div>
-                    <div class="col-xs-9 text-right">
-                        <div id="txtCountPais" class="huge">0</div>
-                        <div>No. Paises</div>
-                    </div>
-                </div>
-            </div>
-            <a href="@Url.Content("~/Catalogo/Pais")">
-                <div class="panel-footer">
-                    <span class="pull-left">Ver Catálogo</span>
-                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                    <div class="clearfix"></div>
-                </div>
-            </a>
+<div id="frmMenu">
+    <div class="row">
+        <div class="col-lg-12">
+            <h3 class="page-header-primary">Menu Principal</h3>
         </div>
+        <!-- /.col-lg-12 -->
     </div>
-    <div class="col-lg-3 col-md-6">
-        <div class="panel panel-info">
-            <div class="panel-heading">
-                <div class="row">
-                    <div class="col-xs-3">
-                        <i class="fa fa-map-marker fa-5x"></i>
-                    </div>
-                    <div class="col-xs-9 text-right">
-                        <div id="txtCountEstado" class="huge">0</div>
-                        <div>No. Estados</div>
+    <!-- /.row -->
+    <div class="row">
+        <div class="col-lg-3 col-md-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-flag fa-5x"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div id="txtCountPais" class="huge">0</div>
+                            <div>No. Paises</div>
+                        </div>
                     </div>
                 </div>
+                <a href="@Url.Content("~/Catalogo/Pais")">
+                    <div class="panel-footer">
+                        <span class="pull-left">Ver Catálogo</span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
             </div>
-            <a href="@Url.Content("~/Catalogo/Estado")">
-                <div class="panel-footer">
-                    <span class="pull-left">Ver Catálogo</span>
-                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                    <div class="clearfix"></div>
-                </div>
-            </a>
         </div>
-    </div>
-    <div class="col-lg-3 col-md-6">
-        <div class="panel panel-green">
-            <div class="panel-heading">
-                <div class="row">
-                    <div class="col-xs-3">
-                        <i class="fa fa-building fa-5x"></i>
-                    </div>
-                    <div class="col-xs-9 text-right">
-                        <div id="txtCountMunicipio" class="huge">0</div>
-                        <div>No. Municipios</div>
+        <div class="col-lg-3 col-md-6">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-map-marker fa-5x"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div id="txtCountEstado" class="huge">0</div>
+                            <div>No. Estados</div>
+                        </div>
                     </div>
                 </div>
+                <a href="@Url.Content("~/Catalogo/Estado")">
+                    <div class="panel-footer">
+                        <span class="pull-left">Ver Catálogo</span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
             </div>
-            <a href="@Url.Content("~/Catalogo/Municipio")">
-                <div class="panel-footer">
-                    <span class="pull-left">Ver Cátalogo</span>
-                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                    <div class="clearfix"></div>
-                </div>
-            </a>
         </div>
-    </div>
-    <div class="col-lg-3 col-md-6">
-        <div class="panel panel-yellow">
-            <div class="panel-heading">
-                <div class="row">
-                    <div class="col-xs-3">
-                        <i class="fa fa-fighter-jet fa-5x"></i>
-                    </div>
-                    <div class="col-xs-9 text-right">
-                        <div id="txtCountCiudad" class="huge">0</div>
-                        <div>No. Ciudades</div>
+        <div class="col-lg-3 col-md-6">
+            <div class="panel panel-green">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-building fa-5x"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div id="txtCountMunicipio" class="huge">0</div>
+                            <div>No. Municipios</div>
+                        </div>
                     </div>
                 </div>
+                <a href="@Url.Content("~/Catalogo/Municipio")">
+                    <div class="panel-footer">
+                        <span class="pull-left">Ver Cátalogo</span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
             </div>
-            <a href="@Url.Content("~/Catalogo/Ciudad")">
-                <div class="panel-footer">
-                    <span class="pull-left">Ver Catálogo</span>
-                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                    <div class="clearfix"></div>
-                </div>
-            </a>
         </div>
-    </div>
-    <div class="col-lg-3 col-md-6">
-        <div class="panel panel-red">
-            <div class="panel-heading">
-                <div class="row">
-                    <div class="col-xs-3">
-                        <i class="fa fa-envelope fa-5x"></i>
-                    </div>
-                    <div class="col-xs-9 text-right">
-                        <div id="txtCountCP" class="huge">13</div>
-                        <div>No. Codigos Postales</div>
+        <div class="col-lg-3 col-md-6">
+            <div class="panel panel-yellow">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-fighter-jet fa-5x"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div id="txtCountCiudad" class="huge">0</div>
+                            <div>No. Ciudades</div>
+                        </div>
                     </div>
                 </div>
+                <a href="@Url.Content("~/Catalogo/Ciudad")">
+                    <div class="panel-footer">
+                        <span class="pull-left">Ver Catálogo</span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
             </div>
-            <a href="@Url.Content("~/Catalogo/CodigoPostal")">
-                <div class="panel-footer">
-                    <span class="pull-left">Ver Catálogo</span>
-                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                    <div class="clearfix"></div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="panel panel-red">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-envelope fa-5x"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div id="txtCountCP" class="huge">13</div>
+                            <div>No. Codigos Postales</div>
+                        </div>
+                    </div>
                 </div>
-            </a>
+                <a href="@Url.Content("~/Catalogo/CodigoPostal")">
+                    <div class="panel-footer">
+                        <span class="pull-left">Ver Catálogo</span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
         </div>
     </div>
 </div>

@@ -13,6 +13,7 @@
     var urls ={
         get login(){ return webroot + "Login/ajaxLogin"},
     }
+    var HomeUrl = window.location.href = "/Home/Index";
 
     var inicializarEventos = function(){
         ctrls.$btnLogin.click(function (e) {
@@ -36,7 +37,7 @@
                         ctrls.$error.html("<span style='color:#cc0000'>Error:</span> " + (data.Mensaje == null ? "No tiene acceso a la aplicación" : data.Mensaje));
                     }
                     else {
-                        window.location.href = "/Home/Index";
+                        window.location.href = HomeUrl;
                     }
                 }
             );

@@ -13,11 +13,9 @@ namespace Catalogos.Controllers
 {
     public class LoginController : BaseController
     {
-
         public ActionResult Index()
         {
-            return View();
-            
+            return View();            
         }
 
         [ValidJsonModel]
@@ -61,13 +59,12 @@ namespace Catalogos.Controllers
 
         public ActionResult logOut() {
             Session["UsuarioWeb"] = null;
+
             return View("Index");
         }
 
         public ActionResult NoAutorizado() {
-
             return View();
         }
-
     }
 }

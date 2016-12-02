@@ -13,7 +13,7 @@
     var urls ={
         get login(){ return webroot + "Login/ajaxLogin"},
     }
-    var HomeUrl = window.location.href = "/Home/Index";
+    var HomeUrl = "/Home/Index";
 
     var inicializarEventos = function(){
         ctrls.$btnLogin.click(function (e) {
